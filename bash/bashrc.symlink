@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# This file is loaded every time a bash shell is launched.
+# Therefore keep the behaviour in this file as light as possible.
+#
+
+# Load in extra files if they exist.
+test -f ~/.bash_aliases && source ~/.bash_aliases
+test -f ~/.bash_exports && source ~/.bash_exports
+test -f ~/.bash_functions && source ~/.bash_functions
+test -f ~/.bash_completion && source ~/.bash_completion
+
+if installed "docker"; then
+	test -f ~/.docker_functions && source ~/.docker_functions
+fi
+
+test -f /etc/bash_completion && source /etc/bash_completion
+test -f /usr/local/git/contrib/completion/git-completion.bash && source /usr/local/git/contrib/completion/git-completion.bash
+test -f /usr/local/git/contrib/completion/git-prompt.sh && source /usr/local/git/contrib/completion/git-prompt.sh
+test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh
+
+# Load ps1 behaviour e.g. prompt, colouring etc. 
+if [ "$PS1" ]; then
+  test -f ~/.ps1 && source ~/.ps1
+fi
+
+# Set some exports. 
+export LOCALIP="127.0.0.1"
+export OS=$(uname)
+
+# Set some conditional exports. 
+test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
+test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
+test -d ~/go_appengine && export PATH=~/go_appengine:$PATH
+test -d ~/go && export GOPATH=~/go && PATH=$GOPATH/bin:$PATH
+test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
+
+# Make 'less' more friendly for non-text input files, see lesspipe(1).
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

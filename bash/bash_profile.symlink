@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# This file is loaded once per user login.
+# Mac OS X seems to run a new login for each terminal that is opened so we 
+# load in .bashrc if it exists. 
+#
+
+# Load .bashrc if it exists.
+test -f ~/.bashrc && source ~/.bashrc

@@ -1,0 +1,351 @@
+#!/bin/bash
+#
+# Place any bash functions for docker in here and they'll get loaded 
+# automatically. 
+#
+
+# Docker func. aliases.
+
+dp() {
+   docker ps -a "${@}"
+}
+
+di() {
+   docker images
+}
+
+ds() {
+   echo "searching..."
+   docker search "${1}"
+}
+
+dr() {
+   echo "running..."
+   docker run -rm "${1}"
+}
+
+dc() {
+   docker rm -f `docker ps -aq` 2> /dev/null
+   docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2>/dev/null
+   docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2>/dev/null
+   docker volume rm $(docker volume ls -qf dangling=true)
+   echo "cleaned"
+}
+
+dei() {
+   docker exec -it ${1} sh
+}
+
+deo() {
+   # Exports the entire container file system to the specified tar file.
+   docker export --output="${1}" ${2}
+}
+
+# Docker images for convience. 
+# Inspired by @jfrazelle 
+
+# simple wrapping method that follows a containers logs
+_docker_logwrap() {
+	docker logs -f `$1`
+}
+# taken from: https://github.com/jfrazelle/dotfiles/blob/master/.dockerfunc
+_docker_relieson(){ 
+	local containers=$@
+
+	for container in $containers; do
+	local state=$(docker inspect --format "{{.State.Running}}" $container 2>/dev/null)
+
+	if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+	echo "$container is not running, starting it for you."
+	$container
+	fi
+	done
+}
+
+### image/container aliases
+
+d_cid() {
+d_registry
+d_mesosphere
+d_gitlab
+d_jenkins
+}
+
+d_registry() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+-d \
+-p 5000:5000 \
+--restart=always \
+--name registry \
+registry:2
+}
+
+d_jenkins() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+--add-host localhost:"${LOCALIP}" \
+--add-host marathon:"${LOCALIP}" \
+-p 8080:8080 \
+-p 50000:50000 \
+-v $HOME/v/jenkins_home:/var/jenkins_home \
+-v $HOME/v/jenkins_user:/root \
+-u 0 \
+-w /root \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v "${HOME}/bin/docker/docker-Li386:/usr/bin/docker" \
+-v /etc/localtime:/etc/localtime:ro \
+--name jenkins \
+-d \
+jenkinsci/jenkins:latest
+}
+
+d_mesosphere() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+# zookeeper
+docker run -d \
+--restart always \
+-p 2181:2181 \
+-p 2888:2888 \
+-p 3888:3888 \
+--name zookeeper \
+netflixoss/exhibitor:1.5.2 1>/dev/null
+
+# master
+docker run -d \
+--restart always \
+-p 5050:5050 \
+--link zookeeper:zk \
+-e MESOS_PORT=5050 \
+-e MESOS_ZK="zk://zk:2181/mesos" \
+-e MESOS_QUORUM=1 \
+-e MESOS_REGISTRY=in_memory \
+-e MESOS_LOG_DIR=/var/log/mesos \
+-e MESOS_WORK_DIR=/var/lib/mesos \
+--name mesos-master \
+mesosphere/mesos-master:0.28.0-2.0.16.ubuntu1404 1>/dev/null
+
+# slave
+docker run -d \
+--restart always \
+--link zookeeper:zk \
+--link mesos-master:master \
+-p 5051:5051 \
+-e MESOS_SWITCH_USER=0 \
+-e MESOS_CONTAINERIZERS=docker,mesos \
+-e MESOS_PORT=5051 \
+-e MESOS_HOSTNAME="${LOCALIP}" \
+-e MESOS_MASTER=zk://zk:2181/mesos \
+-e MESOS_LOG_DIR=/var/log/mesos \
+-v /sys/fs/cgroup:/sys/fs/cgroup \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v "${HOME}/bin/docker/docker-Li386:/usr/bin/docker" \
+--name mesos-slave \
+mesosphere/mesos-slave:0.28.0-2.0.16.ubuntu1404
+
+# marathon
+docker run \
+-d \
+--restart always \
+-p 8787:8080 \
+--link zookeeper:zk \
+mesosphere/marathon:latest \
+--master zk://zk:2181/mesos --zk zk://zk:2181/marathon 1>/dev/null
+}
+
+d_jmeter() {
+ # slave
+ docker run \
+   -P \
+   --name jmeterslave1 \
+   -v "${HOME}/v/jmeter/docker_mnt/":/jmeter_log \
+   -d \
+   cirit/jmeter:slave -j /jmeter_log/slave1.log
+
+ # master
+ docker run \
+   --name jmetermaster \
+   -v "${HOME}/v/jmeter/docker_mnt/":/jmeter_log \
+   --link jmeterslave1 \
+   -P \
+   -d \
+   cirit/jmeter:master -s -R jmeterslave1 -j /jmeter_log/master.log -l /jmeter_log/result.jtl -X
+}
+
+d_elk() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run -d \
+   -p 5601:5601 \
+   -p 9200:9200 \
+   -p 5044:5044 \
+   -p 5000:5000 \
+   --name elk \
+   sebp/elk
+}
+
+d_rabbitmq() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run -d \
+   -e RABBITMQ_DEFAULT_USER=root \
+   -e RABBITMQ_DEFAULT_PASS=pass \
+   -p 15672:15672 \
+   --name rabbit \
+   rabbitmq:3-management
+}
+
+d_elasticsearch() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run -d \
+   -e ES_JAVA_OPTS="-Xms1g -Xmx1g" \
+   -p 9200:9200 \
+   -p 9300:9300 \
+-v $HOME/v/elasticsearch:/usr/share/elasticsearch/data \
+   elasticsearch:5.0.0 -E bootstrap.ignore_system_bootstrap_checks=true
+}
+
+d_nexus() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+--add-host gitlab:"${LOCALIP}" \
+--add-host jenkins:"${LOCALIP}" \
+-p 8081:8081 \
+-v $HOME/v/nexus:/nexus-data \
+--name nexus \
+-d \
+sonatype/nexus3:latest
+}
+
+d_gitlab() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+--add-host jenkins:"${LOCALIP}" \
+--add-host nexus:"${LOCALIP}" \
+-p 80:80 \
+-p 443:443 \
+-p 22:22 \
+-v $HOME/v/gitlab/config:/etc/gitlab \
+-v $HOME/v/gitlab/logs:/var/log/gitlab \
+-v $HOME/v/gitlab/data:/var/opt/gitlab \
+-e GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab'" \
+--name gitlab \
+-d \
+gitlab/gitlab-ce:latest
+}
+
+d_sentry() {
+ docker run -d --name sentry-redis redis
+ docker run -d --name sentry-postgres -e POSTGRES_PASSWORD=secret -e POSTGRES_USER=sentry postgres
+ docker run --rm sentry config generate-secret-key
+ docker run -it --rm -e SENTRY_SECRET_KEY='publicongithub' --link sentry-postgres:postgres --link sentry-redis:redis sentry upgrade
+ docker run -d -p 8080:9000 --name my-sentry -e SENTRY_SECRET_KEY='publicongithub' --link sentry-redis:redis --link sentry-postgres:postgres sentry
+}
+
+d_spark() {
+ docker run \
+   -p 8088:8088 \
+   -p 8042:8042 \
+   -it \
+   -h sandbox \
+   sequenceiq/spark:1.6.0 bash
+}
+
+d_postgres() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+-p 5432:5432 \
+-e POSTGRES_USER=root \
+-e POSTGRES_PASSWORD=pass \
+--name postgres \
+-d \
+postgres:9.6
+}
+
+d_mysql() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+-p 3306:3306 \
+-e MYSQL_USER=root \
+-e MYSQL_ROOT_PASSWORD=pass \
+-v $HOME/v/mysql:/var/lib/mysql \
+--name mysql \
+-d \
+mysql:5.7
+}
+
+d_mongo() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+-p 27017:27017 \
+-v $HOME/v/mongodb:/data/db \
+--name mongodb \
+-d \
+mongo:3.3.8;
+}
+
+d_mongouser() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker exec \
+-ti \
+mongodb \
+mongo admin --eval "db.createUser({user: 'root', pwd: 'pass', roles:[{role:'root',db:'admin'}]});";
+}
+
+d_nginx() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+docker run \
+-p 80:80 \
+--name nginx \
+-d \
+nginx:latest
+}
+
+d_http() {
+docker run \
+--rm \
+-ti \
+clue/httpie:latest "$@"
+}
+
+d_gerrit() {
+if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run \
+   -p 8080:8080 \
+   -p 29418:29418 \
+   -d \
+   openfrontier/gerrit
+}
+
+d_neo4j() {
+ if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run \
+   -p 7474:7474 \
+   -p 7687:7687 \
+   -v $HOME/v/neo4j/data:/data \
+   -d \
+   neo4j:3.0
+}
+
+d_arrangodb() {
+ if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run \
+   -e ARANGO_RANDOM_ROOT_PASSWORD=1 \
+   -p 8529:8529 \
+   -d \
+   arangodb/arangodb
+}
+
+d_prometheus() {
+ if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run \
+   -p 9090:9090 \
+   -v $HOME/v/prometheus:/prometheus \
+   -d \
+   prom/prometheus:master
+}
+
+d_filebeat() {
+ if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
+ docker run \
+ -v $HOME/v/filebeat/filebeat.yml:/filebeat.yml \
+ prima/filebeat:1
+}

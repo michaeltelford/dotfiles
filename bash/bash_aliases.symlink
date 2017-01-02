@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Shell commands.
+alias l='ls -al'
+alias ls='ls -GFh'
+alias c='clear'
+alias cls='clear'
+alias m='make'
+alias mb='make build'
+alias mt='make test'
+alias mr='make run'
+
+# Brew commands.
+alias b='brew'
+alias bs='brew search'
+alias bi='brew install'
+
+# Brew Cask commands. 
+alias bc='brew cask'
+alias bcs='brew cask search'
+alias bci='brew cask install'
+
+# Ruby/Rails commands.
+alias ru='ruby'
+alias ra='rails'
+alias g='gem'
+alias b='bundle'
+alias be='bundle exec'
+alias rs='bundle exec rails server'
+alias bers='bundle exec rails server'
+alias r='bundle exec rake'
+
+# Git commands.
+alias gs='clear; git status'
+alias gl='git log'
+alias glb='git log --walk-reflogs' # shows logs for the current branch changes only
+alias glo='git log --oneline'
+alias glp='git log -p' # shows logs with file changes
+alias gd='git diff'
+alias ga='git add'
+alias gc='git commit'
+alias gb='git branch -av' # shows all branch including remote one's
+alias gcb='git checkout -b' # creates and check's out the new given branch name
+alias gfap='git fetch --all --prune' # Removes any remotely deleted branches
+
+# Other commands.
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+if [ -x /usr/bin/dircolors ]; then
+   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+   alias ls='ls --color=auto'
+   alias grep='grep --color=auto'
+   alias fgrep='fgrep --color=auto'
+   alias egrep='egrep --color=auto'
+fi
+
+alias tmux="TERM=screen-256color-bce tmux"
