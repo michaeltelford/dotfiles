@@ -1,11 +1,17 @@
 source 'https://rubygems.org' do
   gem 'nokogiri'
+  gem 'rails', '>=5.0.0'
 
   group :development do
-	  gem 'rails', '>=5.0.0'
-	  gem 'minitest'
-	  gem 'rspec'
+    gem 'rb-readline'
+    gem 'pry-coolline'
 	  gem 'pry'
 	  gem 'byebug'
+    gem 'hijack'
 	end
+
+  # My own developed gems.
+  group :personal do
+    gem 'wgit'
+  end
 end

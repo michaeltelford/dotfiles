@@ -5,10 +5,12 @@
 # Install any desired ruby versions (using rbenv) and gems (using bundler).
 #
 
-info_p "Starting ruby install..."
+info "Starting ruby install..."
 
 # Do not add a comma between versions. 
 array=( "2.2.2" )
+
+rbenv init
 
 for version in "${array[@]}"
 do
@@ -24,4 +26,4 @@ done
 # install any desired gems...
 bundle install --gemfile "$DOTFILES_ROOT/ruby/Gemfile" --jobs 3
 
-success_p "Ruby installation complete"
+success "Ruby installation complete"

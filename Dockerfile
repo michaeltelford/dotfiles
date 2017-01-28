@@ -6,7 +6,7 @@
 #
 # su default
 # bash
-# ./bootstrap.sh
+# make install
 
 FROM debian:wheezy-slim
 
@@ -18,9 +18,10 @@ RUN apt-get update && apt-get install -y --force-yes \
 		apt-utils \
 		build-essential \
 		python-setuptools \
+    gawk \
 		ruby \
 		curl \
 		bash \
 		git
 
-RUN useradd default && mkdir /home/default && chown default:users /home/default
+RUN useradd --shell /bin/bash default && mkdir /home/default && chown default:users /home/default

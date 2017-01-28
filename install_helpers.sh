@@ -3,14 +3,13 @@
 # Helper methods for the install scripts.
 #
 
+set -e
+
+export DOTFILES_ROOT=$(pwd -P)
+export DOTFILES_BACKUP=~/Downloads/dotfiles_backup
+
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
-}
-
-info_p () {
-  echo ""
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
-  echo ""
 }
 
 user () {
@@ -21,16 +20,32 @@ success () {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
 }
 
-success_p () {
-  echo ""
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-  echo ""
-}
-
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
   exit 1
+}
+
+setup_gitconfig () {
+  if ! [ -f git/gitconfig.local.symlink ]
+  then
+    info 'Initialising git configuration...'
+
+    git_credential='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credential='osxkeychain'
+    fi
+
+    user ' - What is your github author name?'
+    read -e git_authorname
+    user ' - What is your github author email?'
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+
+    success 'Git configuration complete'
+  fi
 }
 
 link_file () {
@@ -131,4 +146,8 @@ create_dir () {
 
 installed () {
   !(test ! $(which $1))
+}
+
+setup_backup_dir () {
+  create_dir "$DOTFILES_BACKUP"
 }

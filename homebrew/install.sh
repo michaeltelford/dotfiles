@@ -6,7 +6,7 @@
 # Updates its indexes and installs the desired dependancies. 
 #
 
-info_p "Starting homebrew install..."
+info "Starting homebrew install..."
 
 # Check for Homebrew and install if necessary. 
 if test ! $(which brew)
@@ -30,4 +30,4 @@ brew cleanup && brew update
 # Install Brewfile containing package dependancies ignoring any failures. 
 brew bundle --file="$DOTFILES_ROOT/homebrew/Brewfile" || true
 
-success_p "Homebrew installation complete"
+success "Homebrew installation complete"

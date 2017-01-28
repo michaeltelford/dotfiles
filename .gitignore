@@ -1,4 +1,5 @@
-.env
-.DS_Store
+**/.DS_Store
+ruby/.bundle
 spike.sh
-**/.bundle
+gitconfig.local.symlink
+.env

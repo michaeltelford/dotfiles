@@ -9,6 +9,16 @@ alias m='make'
 alias mb='make build'
 alias mt='make test'
 alias mr='make run'
+alias mi='make install'
+
+# File system commands.
+alias home='cd ~'
+alias up='cd ..'
+alias down='cd ~/Downloads'
+alias downloads='down'
+alias dev='cd ~/Development'
+alias dot='cd ~/.dotfiles'
+alias dotfiles='dot'
 
 # Brew commands.
 alias b='brew'
@@ -52,5 +62,4 @@ if [ -x /usr/bin/dircolors ]; then
    alias fgrep='fgrep --color=auto'
    alias egrep='egrep --color=auto'
 fi
-
 alias tmux="TERM=screen-256color-bce tmux"

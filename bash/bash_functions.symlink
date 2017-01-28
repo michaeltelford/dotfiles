@@ -1,22 +1,45 @@
 #!/bin/bash
 #
 # Place any bash functions in here and they'll get loaded automatically. 
+# Remember to update the bash_funcs method with new func. names. 
 #
 
-home () {
-	cd ~
+# Prints any methods contained in this file, provides an easy go to. 
+bash_funcs () {
+    echo "findhere, findall, rm_ds, dir, edit, manpdf, ziparc, extract, sshi, gblogs"
 }
 
-dev () {
-	cd ~/Development
-}
-
-find_here () {
+findhere () {
 	find . -name $1
+}
+
+findall () {
+    find / -name $1
+}
+
+find_dots () { 
+	find ~ -name ".*" -maxdepth 1 -type l
+}
+
+rm_ds () {
+ find . -name ".DS_Store" -delete
 }
 
 dir () {
     mkdir $1 && cd $1
+}
+
+edit () {
+    exec "$EDITOR" "${1:-.}"
+}
+
+# Open man page as PDF without saving it anywhere. 
+manpdf () {
+  man -t "${1}" | open -f -a /Applications/Preview.app/
+}
+
+ziparc () {
+  zip -r "$1.zip" "$1"
 }
 
 # Usage: extract <file>
@@ -46,4 +69,15 @@ extract () {
     else
         echo "'$1' is not a valid file"
     fi
+}
+
+sshi () {
+  ssh -i ~/.ssh/id_rsa $1
+}
+alias sushi='sshi'
+
+# Display the logs of the current branch only starting with 
+# last commit before the branch was created. 
+gblogs () {
+  git log --walk-reflogs "$(git rev-parse --abbrev-ref HEAD)"
 }

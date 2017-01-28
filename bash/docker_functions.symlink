@@ -4,7 +4,7 @@
 # automatically. 
 #
 
-# Docker func. aliases.
+### Docker executable aliases.
 
 dp() {
    docker ps -a "${@}"
@@ -41,8 +41,7 @@ deo() {
    docker export --output="${1}" ${2}
 }
 
-# Docker images for convience. 
-# Inspired by @jfrazelle 
+### Helper methods. 
 
 # simple wrapping method that follows a containers logs
 _docker_logwrap() {
@@ -62,7 +61,7 @@ _docker_relieson(){
 	done
 }
 
-### image/container aliases
+### Image/container aliases, inspired by @jfrazelle 
 
 d_cid() {
 d_registry
