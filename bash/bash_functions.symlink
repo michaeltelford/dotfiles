@@ -4,31 +4,37 @@
 # Remember to update the bash_funcs method with new func. names. 
 #
 
-# Prints any methods contained in this file, provides an easy go to. 
+# Prints any methods contained in this file, provides an easy go to reference. 
 bash_funcs () {
-    echo "findhere, findall, rm_ds, dir, edit, manpdf, ziparc, extract, sshi, gblogs"
+    echo "findhere, findall, find_dot_links, rm_ds, dir, edit, manpdf, ziparc, extract, sshi, gblogs"
 }
 
+# Find all files within the local dir with the given glob. 
 findhere () {
 	find . -name $1
 }
 
+# Find all files on the file system with the given glob. 
 findall () {
     find / -name $1
 }
 
-find_dots () { 
+# Find all dotfile symlinks in the home folder. 
+find_dot_links () { 
 	find ~ -name ".*" -maxdepth 1 -type l
 }
 
+# Recursively remove all `.DS_Store` files from within the local dir. 
 rm_ds () {
  find . -name ".DS_Store" -delete
 }
 
+# Create a directory in the current `pwd` and `cd` into it. 
 dir () {
     mkdir $1 && cd $1
 }
 
+# Open a directory, file or files using $EDITOR. 
 edit () {
     exec "$EDITOR" "${1:-.}"
 }
@@ -38,6 +44,7 @@ manpdf () {
   man -t "${1}" | open -f -a /Applications/Preview.app/
 }
 
+# Zip a file. 
 ziparc () {
   zip -r "$1.zip" "$1"
 }
@@ -71,10 +78,16 @@ extract () {
     fi
 }
 
+# Open an SSH session using your default SSH key. 
 sshi () {
   ssh -i ~/.ssh/id_rsa $1
 }
 alias sushi='sshi'
+
+# Replace all instances of x with z in file y. 
+sed_file () {
+	sed -e "s/$1/$2/g" $3
+}
 
 # Display the logs of the current branch only starting with 
 # last commit before the branch was created. 

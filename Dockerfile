@@ -6,7 +6,7 @@
 #
 # su default
 # bash
-# make install
+# make install (or otherwise)
 
 FROM debian:wheezy-slim
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --force-yes \
 		apt-utils \
 		build-essential \
 		python-setuptools \
-    gawk \
+    	gawk \
 		ruby \
 		curl \
 		bash \
