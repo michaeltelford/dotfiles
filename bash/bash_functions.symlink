@@ -5,9 +5,11 @@
 #
 
 # Prints any methods contained in this file, provides an easy go to reference. 
-bash_funcs () {
-    echo "findhere, findall, find_dot_links, rm_ds, dir, edit, manpdf, ziparc, extract, sshi, gblogs"
+bashfuncs () {
+    echo "findhere, findall, finddots, rmds, dir, edit, manpdf, zipit, \
+          extract, sshi, gblogs"
 }
+alias shellfuncs=bashfuncs
 
 # Find all files within the local dir with the given glob. 
 findhere () {
@@ -20,12 +22,12 @@ findall () {
 }
 
 # Find all dotfile symlinks in the home folder. 
-find_dot_links () { 
+finddots () { 
 	find ~ -name ".*" -maxdepth 1 -type l
 }
 
 # Recursively remove all `.DS_Store` files from within the local dir. 
-rm_ds () {
+rmds () {
  find . -name ".DS_Store" -delete
 }
 
@@ -45,7 +47,7 @@ manpdf () {
 }
 
 # Zip a file. 
-ziparc () {
+zipit () {
   zip -r "$1.zip" "$1"
 }
 
@@ -85,8 +87,8 @@ sshi () {
 alias sushi='sshi'
 
 # Replace all instances of x with z in file y. 
-sed_file () {
-	sed -e "s/$1/$2/g" $3
+sedit () {
+	sed -ie "s/$1/$2/g" $3
 }
 
 # Display the logs of the current branch only starting with 

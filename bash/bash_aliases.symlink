@@ -1,24 +1,20 @@
 #!/bin/bash
 
-# Shell commands.
+# General shell commands.
 alias l='ls -al'
 alias ls='ls -GFh'
 alias c='clear'
-alias cls='clear'
-alias m='make'
-alias mb='make build'
-alias mt='make test'
-alias mr='make run'
-alias mi='make install'
 
 # File system commands.
 alias home='cd ~'
 alias up='cd ..'
 alias down='cd ~/Downloads'
-alias downloads='down'
 alias dev='cd ~/Development'
 alias dot='cd ~/.dotfiles'
-alias dotfiles='dot'
+
+# Make commands. 
+alias m='make'
+alias mi='make install'
 
 # Brew commands.
 alias b='brew'
@@ -30,31 +26,31 @@ alias bc='brew cask'
 alias bcs='brew cask search'
 alias bci='brew cask install'
 
-# Ruby/Rails commands.
-alias ru='ruby'
-alias ra='rails'
-alias g='gem'
-alias b='bundle'
-alias be='bundle exec'
-alias rs='bundle exec rails server'
-alias bers='bundle exec rails server'
-alias r='bundle exec rake'
-
 # Git commands.
 alias gs='clear; git status'
 alias gl='git log'
-alias glb='git log --walk-reflogs' # shows logs for the current branch changes only
 alias glo='git log --oneline'
 alias glp='git log -p' # shows logs with file changes
 alias gd='git diff'
 alias ga='git add'
 alias gc='git commit'
-alias gb='git branch -av' # shows all branch including remote one's
+alias gb='git branch -av' # shows all branches including remote one's
+alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
 alias gfap='git fetch --all --prune' # Removes any remotely deleted branches
 
-# Other commands.
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# Basic Docker (and Docker Compose) commands.
+# See docker_functions.symlink for more advanced functionality. 
+alias d='docker'
+alias dc='docker-compose'
+
+# Ruby/Rails commands.
+alias bun='bundle install'
+alias bex='bundle exec'
+alias rs='bundle exec rails server'
+alias ra='bundle exec rake'
+
+# Load GNU coreutils dircolors (on Linux based systems excluding OS X). 
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
    alias ls='ls --color=auto'
@@ -62,4 +58,3 @@ if [ -x /usr/bin/dircolors ]; then
    alias fgrep='fgrep --color=auto'
    alias egrep='egrep --color=auto'
 fi
-alias tmux="TERM=screen-256color-bce tmux"

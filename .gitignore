@@ -3,3 +3,4 @@ ruby/.bundle
 spike.sh
 gitconfig.local.symlink
 .env
+bash/bash_temp_functions.symlink
