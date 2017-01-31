@@ -11,18 +11,21 @@ Quick setup of an awesome development environment on any *nix machine. Boom!
 - Ruby interpreters and gems
 - ...
 
-## Dependancies
+## Dependancies 
 
-If on OS X then the below should already be installed, otherwise if on linux
-use the native package manager to install these packages first. 
+Note: The below dependancies won't be necessary if you're only installing the dotfile symlinks. 
 
-Also the below won't be necessary if you're only installing the dotfile symlinks. 
+Both OS X and Linux:
+- git
 
+Just OS X:
+- xcode
+
+Just Linux:
 - bash
 - gawk
 - curl
 - ruby
-- git
 
 ## Usage
 
@@ -38,6 +41,8 @@ Be sure to see the `make help` for what gets installed. Instead of installing
 everything with `make install` you can choose individual components. For 
 example running `make dotfiles` will only install the symlinks e.g. .bashrc to 
 your home folder. 
+
+You may be prompted for input throughout the install process so keep an eye on it. 
 
 You will likely need to restart any existing shell sessions for changes to 
 take effect. 

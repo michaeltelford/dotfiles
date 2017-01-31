@@ -35,5 +35,4 @@ if test "$(uname)" = "Darwin"; then
 	defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 	success "Mac OS X installation complete"
-	info "Run `killall Finder` or restart OS for finder defaults to take effect"
 fi
