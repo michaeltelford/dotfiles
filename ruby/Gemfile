@@ -11,7 +11,7 @@ source 'https://rubygems.org' do
 	end
 
   # My own developed gems.
-  group :personal do
+  group :developed do
     gem 'wgit'
   end
 end
