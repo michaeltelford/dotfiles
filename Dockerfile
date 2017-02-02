@@ -24,4 +24,5 @@ RUN apt-get update && apt-get install -y --force-yes \
 		bash \
 		git
 
-RUN useradd --shell /bin/bash default && mkdir /home/default && chown default:users /home/default
+RUN useradd --shell /bin/bash default && \
+	mkdir /home/default && chown default:users /home/default
