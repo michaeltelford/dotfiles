@@ -37,7 +37,7 @@ setup_gitconfig () {
       git_credential='osxkeychain'
     fi
 
-    user ' - What is your github author name?'
+    user ' - What is your full name (not your GitHub handle)?'
     read -e git_authorname
     user ' - What is your github author email?'
     read -e git_authoremail

@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = mate -w
+        editor = /usr/local/bin/mate -w
 [apply]
         whitespace = nowarn
 [mergetool]
