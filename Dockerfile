@@ -5,7 +5,6 @@
 # Then to test new changes run the following in the container bash shell:
 #
 # su default
-# bash
 # make install (or otherwise)
 
 FROM debian:wheezy-slim
@@ -18,11 +17,12 @@ RUN apt-get update && apt-get install -y --force-yes \
 		apt-utils \
 		build-essential \
 		python-setuptools \
-    	gawk \
+    gawk \
+    nano \
 		ruby \
 		curl \
 		bash \
 		git
 
 RUN useradd --shell /bin/bash default && \
-	mkdir /home/default && chown default:users /home/default
+	  mkdir /home/default && chown default:users /home/default
