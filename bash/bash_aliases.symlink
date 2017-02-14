@@ -34,6 +34,7 @@ alias glp='git log -p' # shows logs with file changes
 alias gd='git diff'
 alias ga='git add'
 alias gc='git commit'
+alias gr='git remote -v'
 alias gb='git branch -av' # shows all branches including remote one's
 alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name

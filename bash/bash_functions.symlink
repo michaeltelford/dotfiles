@@ -7,7 +7,7 @@
 # Prints any methods contained in this file, provides an easy go to reference. 
 bashfuncs () {
     echo "findhere, findall, finddots, rmds, dir, edit, manpdf, zipit, \
-          extract, sshi, sedit, gblogs"
+extract, sshi, sedit, gblogs"
 }
 alias shellfuncs=bashfuncs
 
@@ -92,7 +92,7 @@ sedit () {
 }
 
 # Display the logs of the current branch only starting with 
-# last commit before the branch was created. 
+# last commit when the branch was created. 
 gblogs () {
   git log --walk-reflogs "$(git rev-parse --abbrev-ref HEAD)"
 }
