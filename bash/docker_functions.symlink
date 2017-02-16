@@ -19,7 +19,7 @@ ds() {
   docker search "${1}"
 }
 
-dc() {
+dn() {
   echo "Cleaning..."
   docker rm -f `docker ps -aq` 2> /dev/null
   docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2>/dev/null
