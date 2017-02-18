@@ -17,12 +17,12 @@ RUN apt-get update && apt-get install -y --force-yes \
 		apt-utils \
 		build-essential \
 		python-setuptools \
-    gawk \
-    nano \
+    	gawk \
+    	nano \
 		ruby \
 		curl \
 		bash \
 		git
 
 RUN useradd --shell /bin/bash default && \
-	  mkdir /home/default && chown default:users /home/default
+	mkdir /home/default && chown default:users /home/default
