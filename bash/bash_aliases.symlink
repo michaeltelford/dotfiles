@@ -11,6 +11,7 @@ alias up='cd ..'
 alias down='cd ~/Downloads'
 alias dev='cd ~/Development'
 alias dot='cd ~/.dotfiles'
+alias godev='cd $GOPATH'
 
 # Make commands. 
 alias m='make'

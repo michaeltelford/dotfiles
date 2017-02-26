@@ -39,20 +39,20 @@ backup:
 	@find ~ -maxdepth 1 -type f -name '.*' -exec mv {} $(DOTFILES_BACKUP) \;
 
 install: symlink brew topics
-	@# Wrapper for dependant tasks. 
+    # Wrapper for dependant tasks. 
 
 symlink:
 	@source "$(DOTFILES_ROOT)/install_helpers.sh" && \
 	setup_gitconfig && \
 	symlink_dotfiles
 dotfiles: symlink
-	@# Alias for symlink
+    # Alias for symlink.
 
 brew:
 	@source "$(DOTFILES_ROOT)/install_helpers.sh" && \
 	source "$(DOTFILES_ROOT)/homebrew/install.sh"
 homebrew: brew
-	@# Alias for brew. 
+    # Alias for brew. 
 
 topics:
 	@source "$(DOTFILES_ROOT)/install_helpers.sh" && \

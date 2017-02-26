@@ -30,9 +30,9 @@ export TMOUT=0                # auto logout after n seconds of inactivity
 export VIDEO_FORMAT=NTSC            # for use with creating compatible DVDs ('dvdauthor -x dvdauthor.xml' will fail if this not here)
 
 # Conditional exports. 
-test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
-test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
-test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
 test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
 test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
 test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
+test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
+test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
+test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH

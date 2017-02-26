@@ -1,98 +1,109 @@
 #!/bin/bash
 #
 # Place any bash functions in here and they'll get loaded automatically. 
-# Remember to update the bash_funcs method with new func. names. 
+# Remember to update the bash_funcs method with any new func. details and an 
+# example command showing any args if applicable. 
 #
 
-# Prints any methods contained in this file, provides an easy go to reference. 
+# Prints any methods contained in this file, provides an easy go-to reference. 
 bashfuncs () {
-    echo "findhere, findall, finddots, rmds, dir, edit, manpdf, zipit, \
-extract, sshi, sedit, gblogs"
+    echo ''
+    echo 'Bash Functions'
+    echo ''
+    
+    echo 'findhere - Find files in local dir with given glob e.g.'
+    echo '           findhere "*.log"'
+    echo 'findall  - Find all matching files on file system e.g.'
+    echo '           findall "docker"'
+    echo 'finddot  - Find all dotfile symlinks in the home folder e.g.'
+    echo 'rmds     - Recursively remove all .DS_Store files from local dir'
+    echo 'dir      - Create a dir in the local dir and cd into it e.g.'
+    echo '           dir newproject'
+    echo 'manpdf   - Open man page as PDF without saving it anywhere e.g.'
+    echo '           manpdf ls'
+    echo 'zipit    - Zip a file in the local dir e.g.'
+    echo '           zipit newproject'
+    echo 'extract  - Extracts archived files / mounts disk images e.g.'
+    echo '           extract newproject.zip'
+    echo 'sshi     - SSH using the identity file ~/.ssh/id_rsa e.g.'
+    echo '           sshi user@server.com'
+    echo 'sedit    - Replace all instances of x with z in file y e.g.'
+    echo '           sedit "hello" "ciao" myfile.txt'
+    echo 'gblogs   - Display logs of current branch starting with the last '
+    echo '           commit when the branch was created'
+    echo 'launch   - Launches a Mac OS X application e.g.'
+    echo '           launch calculator'
+    
+    echo ""
 }
 alias shellfuncs=bashfuncs
 
-# Find all files within the local dir with the given glob. 
 findhere () {
-	find . -name $1
+	find . -name "$1"
 }
 
-# Find all files on the file system with the given glob. 
 findall () {
-    find / -name $1
+  find / -name "$1"
 }
-
-# Find all dotfile symlinks in the home folder. 
-finddots () { 
+ 
+finddot () { 
 	find ~ -name ".*" -maxdepth 1 -type l
 }
-
-# Recursively remove all `.DS_Store` files from within the local dir. 
+ 
 rmds () {
- find . -name ".DS_Store" -delete
+  find . -name ".DS_Store" -delete
 }
 
-# Create a directory in the current `pwd` and `cd` into it. 
 dir () {
-    mkdir $1 && cd $1
+  mkdir "$1" && cd "$1"
 }
 
-# Open a directory, file or files using $EDITOR. 
-edit () {
-    exec "$EDITOR" "${1:-.}"
-}
-
-# Open man page as PDF without saving it anywhere. 
 manpdf () {
   man -t "${1}" | open -f -a /Applications/Preview.app/
 }
-
-# Zip a file. 
+ 
 zipit () {
   zip -r "$1.zip" "$1"
 }
 
-# Usage: extract <file>
-# Description: extracts archived files / mounts disk images
-# Note: .dmg/hdiutil is macOS-specific.
-#
 # credit: http://nparikh.org/notes/zshrc.txt
 extract () {
-    if [ -f $1 ]; then
-        case $1 in
-            *.tar.bz2)  tar -jxvf $1                        ;;
-            *.tar.gz)   tar -zxvf $1                        ;;
-            *.bz2)      bunzip2 $1                          ;;
-            *.dmg)      hdiutil mount $1                    ;;
-            *.gz)       gunzip $1                           ;;
-            *.tar)      tar -xvf $1                         ;;
-            *.tbz2)     tar -jxvf $1                        ;;
-            *.tgz)      tar -zxvf $1                        ;;
-            *.zip)      unzip $1                            ;;
-            *.ZIP)      unzip $1                            ;;
-            *.pax)      cat $1 | pax -r                     ;;
-            *.pax.Z)    uncompress $1 --stdout | pax -r     ;;
-            *.rar)      unrar x $1                          ;;
-            *.Z)        uncompress $1                       ;;
-            *)          echo "'$1' cannot be extracted/mounted via extract()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
+  if [ -f $1 ]; then
+    case $1 in
+      *.tar.bz2)  tar -jxvf $1                        ;;
+      *.tar.gz)   tar -zxvf $1                        ;;
+      *.bz2)      bunzip2 $1                          ;;
+      *.dmg)      hdiutil mount $1                    ;;
+      *.gz)       gunzip $1                           ;;
+      *.tar)      tar -xvf $1                         ;;
+      *.tbz2)     tar -jxvf $1                        ;;
+      *.tgz)      tar -zxvf $1                        ;;
+      *.zip)      unzip $1                            ;;
+      *.ZIP)      unzip $1                            ;;
+      *.pax)      cat $1 | pax -r                     ;;
+      *.pax.Z)    uncompress $1 --stdout | pax -r     ;;
+      *.rar)      unrar x $1                          ;;
+      *.Z)        uncompress $1                       ;;
+      *)          echo "'$1' cannot be extracted/mounted via extract()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
-# Open an SSH session using your default SSH key. 
 sshi () {
   ssh -i ~/.ssh/id_rsa $1
 }
 alias sushi='sshi'
 
-# Replace all instances of x with z in file y. 
 sedit () {
 	sed -ie "s/$1/$2/g" $3
 }
 
-# Display the logs of the current branch only starting with 
-# last commit when the branch was created. 
 gblogs () {
   git log --walk-reflogs "$(git rev-parse --abbrev-ref HEAD)"
+}
+
+launch () {
+  open -a "$1.app"
 }
