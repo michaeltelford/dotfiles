@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# This file is loaded every time a shell is launched.
+# Therefore keep the behaviour in this file as light as possible.
+#
+
+set completion-ignore-case On

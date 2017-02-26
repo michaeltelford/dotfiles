@@ -8,12 +8,13 @@
 if test "$(uname)" = "Darwin"; then
 	info "Starting Mac OS X install..."
 
+  # Display system/hidden files in finder. 
 	defaults write com.apple.finder AppleShowAllFiles TRUE
 
 	# Use AirDrop over every interface. Seriously, this should be a default.
 	defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
-	# Always open everything in Finder's list view. This is important.
+	# Always open everything in Finder's list view. 
 	defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 	# Show the ~/Library folder.

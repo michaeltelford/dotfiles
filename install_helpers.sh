@@ -6,7 +6,6 @@
 set -e
 
 export DOTFILES_ROOT=$(pwd -P)
-export DOTFILES_BACKUP=~/Downloads/dotfiles_backup
 
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
@@ -106,8 +105,14 @@ link_file () {
 
     if [ "$backup" == "true" ]
     then
-      mv "$dst" "${dst}.backup"
-      success "Moved $dst to ${dst}.backup"
+      # Only backup if the $dst file isn't a symlink. 
+      if [ -L "$dst" ]
+      then
+        rm -f "$dst"
+      else
+        mv "$dst" "${dst}.backup"
+        success "Moved $dst to ${dst}.backup"
+      fi
     fi
 
     if [ "$skip" == "true" ]
@@ -146,8 +151,4 @@ create_dir () {
 
 installed () {
   !(test ! $(which $1))
-}
-
-setup_backup_dir () {
-  create_dir "$DOTFILES_BACKUP"
 }

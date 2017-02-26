@@ -3,7 +3,7 @@
 # Running `make install` will run all the below tasks installing everything. 
 # Alternatively you can choose what parts to install yourself. 
 # 
-# Add new functionality by adding a topic folder e.g. ./node and in it an 
+# Add new functionality by adding a topic folder e.g. ./nodejs and in it an 
 # install.sh script which handles all aspects of that topic. It will be 
 # run automatically by `make topics` below. 
 #
@@ -14,9 +14,8 @@
 
 SHELL := /bin/bash
 DOTFILES_ROOT := `pwd -P`
-DOTFILES_BACKUP := ~/Downloads/dotfiles_backup
 
-.PHONY: help backup install symlink dotfiles brew homebrew topics run
+.PHONY: help install symlink dotfiles brew homebrew topics run
 
 help:
 	@echo ""
@@ -30,13 +29,6 @@ help:
 	@echo "           Use 'make run TOPIC=ruby' etc."
 	@echo "           Note: some installers require certain brew packages."
 	@echo ""
-
-# Not called during install because dotfiles are backed up automatically, 
-# used purely for development of this dotfile project.
-backup:
-	@source "$(DOTFILES_ROOT)/install_helpers.sh" && \
-	setup_backup_dir
-	@find ~ -maxdepth 1 -type f -name '.*' -exec mv {} $(DOTFILES_BACKUP) \;
 
 install: symlink brew topics
     # Wrapper for dependant tasks. 

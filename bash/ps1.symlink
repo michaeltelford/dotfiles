@@ -24,7 +24,6 @@ if [ "$PS1" ]; then # if running interactively, then run till 'fi' at EOF:
 	set -b                      # causes output from background processes to be output right away, not on wait for next primary prompt
 	set bell-style visible            # I hate noise
 	set -o notify                   # notify when jobs running in background terminate
-	set completion-ignore-case on 	# auto-completes ignores case
 	shopt -s cdable_vars                # set the bash option so that no '$' is required (disallow write access to terminal)
 	shopt -s cdspell                # this will correct minor spelling errors in a cd command
 	shopt -s checkhash
