@@ -1,6 +1,8 @@
 source 'https://rubygems.org' do
+  gem 'rake'
   gem 'rack'
   gem 'rails', '>=5.0.0'
+  gem 'hanami'
   gem 'sinatra'
   gem 'thin'
   gem 'json'
