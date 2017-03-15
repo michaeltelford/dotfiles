@@ -22,8 +22,8 @@ ds() {
 dn() {
   echo "Nuking..."
   docker rm -f `docker ps -aq` 2> /dev/null
-  docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2>/dev/null
-  docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2>/dev/null
+  docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2> /dev/null
+  docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2> /dev/null
   docker volume rm $(docker volume ls -qf dangling=true)
 }
 
@@ -36,9 +36,26 @@ dei() {
   docker exec -it ${1} sh
 }
 
+# Exports the entire container file system to the specified tar file.
 deo() {
-  # Exports the entire container file system to the specified tar file.
   docker export --output="${1}" ${2}
+}
+
+# Temp func to start and bash into a docker image based on `$(pwd)/Dockerfile`. 
+# It is assumed that the docker image name will be the same as the local dir name. 
+dapp () {
+  local service=$(basename "$PWD")
+  dn # docker nuke func. 
+  docker rmi -f service
+  docker build -t service . && \
+    docker run --rm -it --name service \
+      -p 80:80 \
+      -p 8080:8080 \
+      -p 4567:4567 \
+      -p 3000:3000 \
+      -p 7000:7000 \
+      -p 8000:8000 \
+      service bash
 }
 
 ### Helper methods. 
