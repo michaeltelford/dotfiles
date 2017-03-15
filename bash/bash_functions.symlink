@@ -29,12 +29,13 @@ bashfuncs () {
     echo '           extract newproject.zip'
     echo 'sshi     - SSH using the identity file ~/.ssh/id_rsa e.g.'
     echo '           sshi user@server.com'
-    echo 'sedit    - Replace all instances of x with z in file y e.g.'
+    echo 'sedit    - Replace all instances of X with Y in file Z e.g.'
     echo '           sedit "hello" "ciao" myfile.txt'
     echo 'gblogs   - Display logs of current branch starting with the last '
     echo '           commit when the branch was created'
     echo 'launch   - Launches a Mac OS X application e.g.'
     echo '           launch calculator'
+    echo 'openrepo - Opens the current git repo in local dir with $BROWSER'
     
     echo ""
 }
@@ -112,4 +113,9 @@ gblogs () {
 
 launch () {
   open -a "$1.app"
+}
+
+openrepo () {
+  url=$(git remote -v | grep "fetch" | awk '{print $2}' | rev | sed "s/tig.//" | rev)
+  open $url
 }
