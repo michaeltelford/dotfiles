@@ -21,9 +21,9 @@ ds() {
 
 dn() {
   echo "Nuking..."
-  docker rm -f `docker ps -aq` 2> /dev/null
-  docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2> /dev/null
-  docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2> /dev/null
+  docker rm -f `docker ps -aq` 2>/dev/null
+  docker rm -v `docker ps --filter status=exited -q 2>/dev/null` 2>/dev/null
+  docker rmi `docker images --filter dangling=true -q 2>/dev/null` 2>/dev/null
   docker volume rm $(docker volume ls -qf dangling=true)
 }
 
@@ -52,6 +52,7 @@ dapp () {
       -p 80:80 \
       -p 8080:8080 \
       -p 4567:4567 \
+      -p 2300:2300 \
       -p 3000:3000 \
       -p 7000:7000 \
       -p 8000:8000 \
