@@ -23,5 +23,5 @@ source 'https://rubygems.org' do
   end
   
   # Place any problematic install gems at the end. 
-  gem 'nokogiri'
+  gem 'nokogiri' # `xcode-select --install` should be complete on mac os x. 
 end

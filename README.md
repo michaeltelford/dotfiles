@@ -1,14 +1,14 @@
 
 # Dotfiles
 
-Quick setup of an awesome development environment on any *nix machine. Boom!
+Quick setup of an awesome development environment on any *nix machine. 
 
 ## Includes
 
 - Bash customisations (aliases, functions, git prompt etc.)
 - Homebrew (or Linuxbrew) packages
 - Docker functionality
-- Ruby interpreters and gems
+- Ruby interpreters (using `rbenv`) and gems
 - ...
 
 ## Dependancies 
