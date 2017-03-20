@@ -16,12 +16,12 @@ Quick setup of an awesome development environment on any *nix machine. Boom!
 Note: The below dependancies won't be necessary if you're only installing the dotfile symlinks. 
 
 Both OS X and Linux:
-- git
+- git (`brew install libgit2` using Homebrew or a manual install)
 
 Just OS X:
-- xcode
+- xcode (`xcode-select --install` and follow prompt)
 
-Just Linux:
+Just Linux (using the native package manager):
 - bash
 - gawk
 - curl

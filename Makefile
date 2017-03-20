@@ -20,6 +20,7 @@ DOTFILES_ROOT := `pwd -P`
 help:
 	@echo ""
 	@echo "Dotfiles"
+	@echo "--------"
 	@echo ""
 	@echo "install  - Installs dotfiles, homebrew and topics."
 	@echo "dotfiles - Installs dotfile symlinks."

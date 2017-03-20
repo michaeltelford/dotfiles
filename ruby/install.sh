@@ -2,16 +2,16 @@
 #
 # Ruby
 #
-# Install any desired ruby versions (using rbenv) and gems (using bundler).
+# Install any desired Ruby versions (using rbenv) and gems (using bundler).
 #
 
 info "Starting ruby install..."
 
 eval "$(rbenv init -)"
 
-# List ruby versions to install, do not add a comma between versions. 
-# The last version listed will be set as the global default version. 
-array=( "2.2.2" )
+# List Ruby versions to install, do NOT add a comma between versions. 
+# The LAST version listed will be set as the global default version. 
+array=( "2.2.2" "2.4.0" )
 
 for version in "${array[@]}"
 do
@@ -24,14 +24,18 @@ do
 	fi
 done
 
-# Set the global ruby version.
+# Set the global Ruby version.
 VERSION=${array[${#array[@]}-1]}
 info "Setting global ruby version to $VERSION..."
 rbenv global $VERSION
 
-# Install any desired gems...
+# Install any desired gems (for the global version of Ruby)...
 info "Running 'bundle install'..."
+
+gem update --system
 gem install bundler
+
+bundle config build.nokogiri --use-system-libraries
 bundle install --gemfile "$DOTFILES_ROOT/ruby/Gemfile" --jobs 3 || true
 
 success "Ruby installation complete"

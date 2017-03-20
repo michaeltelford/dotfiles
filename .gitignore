@@ -1,7 +1,11 @@
 **/.DS_Store
-ruby/.bundle
-spike.sh
-**/gitconfig.local.symlink
-.env
+**/spike.sh
+**/.env
+
 bash/bash_temp_functions.symlink
 bash/bash_temp_exports.symlink
+
+git/gitconfig.local.symlink
+
+ruby/.bundle
+ruby/Gemfile.lock
