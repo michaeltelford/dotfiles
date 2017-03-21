@@ -9,6 +9,7 @@
 bashfuncs () {
     echo ''
     echo 'Bash Functions'
+    echo '--------------'
     echo ''
     
     echo 'findhere - Find files in local dir with given glob e.g.'
@@ -35,7 +36,9 @@ bashfuncs () {
     echo '           commit when the branch was created'
     echo 'launch   - Launches a Mac OS X application e.g.'
     echo '           launch calculator'
-    echo 'openrepo - Opens the current git repo in local dir with $BROWSER'
+    echo 'openrepo - Opens the local dir git repo with $BROWSER'
+    echo 'grmb     - Removes a git branch on the remote repository e.g.'
+    echo '           grmb origin mybranch'
     
     echo ""
 }
@@ -118,4 +121,8 @@ launch () {
 openrepo () {
   url=$(git remote -v | grep "fetch" | awk '{print $2}' | rev | sed "s/tig.//" | rev)
   open $url
+}
+
+grmb () {
+  git push $1 --delete $2
 }
