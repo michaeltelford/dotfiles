@@ -27,6 +27,26 @@ dn() {
   docker volume rm $(docker volume ls -qf dangling=true)
 }
 
+# Removes n number of the latest docker images (see `di` above)
+# n defaults to 1 if no function param is provided. 
+drmi() {
+  local i=0
+  local max=1
+  if [ ! $# -eq 0 ]; then
+    max=$1
+  fi
+  
+  for id in `docker images | awk '{print $3}'`; do
+    if [ ! $id == "IMAGE" ]; then
+      if [ $i == $max ]; then
+        break
+      fi
+      docker rmi -f $id
+      ((i++))
+    fi
+  done
+}
+
 dr() {
 echo "Running..."
   docker run --rm --name "${1}" "${1}"

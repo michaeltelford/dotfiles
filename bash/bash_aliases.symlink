@@ -46,11 +46,18 @@ alias gfap='git fetch --all --prune' # Removes any remotely deleted branches
 alias d='docker'
 alias dc='docker-compose'
 
-# Ruby/Rails commands.
+# Ruby commands.
 alias bex='bundle exec'
+alias ra='bundle exec rake'
+alias rat='bundle exec rake test'
+
+# Rails commands.
 alias rl='bundle exec rails'
 alias rs='bundle exec rails server'
-alias ra='bundle exec rake'
+
+# Hanami commands.
+alias hi='bundle exec hanami'
+alias hs='bundle exec hanami server'
 
 # Load GNU coreutils dircolors (on Linux based systems excluding OS X). 
 if [ -x /usr/bin/dircolors ]; then
