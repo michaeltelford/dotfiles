@@ -4,6 +4,7 @@
 
 bash/bash_temp_functions.symlink
 bash/bash_temp_exports.symlink
+bash/bash_temp_aliases.symlink
 
 git/gitconfig.local.symlink
 
