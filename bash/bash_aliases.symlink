@@ -9,11 +9,12 @@ alias c='clear'
 alias home='cd ~'
 alias up='cd ..'
 alias down='cd ~/Downloads'
-alias dev='cd ~/Development'
 alias dot='cd ~/.dotfiles'
+alias dev='cd ~/Development'
 alias godev='cd $GOPATH'
+alias spikes='cd ~/Development/Spikes'
 
-# Make commands. 
+# Make commands.
 alias m='make'
 alias mi='make install'
 
@@ -22,12 +23,13 @@ alias b='brew'
 alias bs='brew search'
 alias bi='brew install'
 
-# Brew Cask commands. 
+# Brew Cask commands.
 alias bc='brew cask'
 alias bcs='brew cask search'
 alias bci='brew cask install'
 
 # Git commands.
+alias g='git'
 alias gs='clear; git status'
 alias gl='git log'
 alias glo='git log --oneline'
@@ -39,10 +41,10 @@ alias gr='git remote -v'
 alias gb='git branch -av' # shows all branches including remote one's
 alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
-alias gfap='git fetch --all --prune' # Removes any remotely deleted branches
+alias gfap='git fetch --all --prune' # Updates the remotes branches
 
 # Basic Docker (and Docker Compose) commands.
-# See docker_functions.symlink for more advanced functionality. 
+# See docker_functions.symlink for more advanced functionality.
 alias d='docker'
 alias dc='docker-compose'
 
@@ -59,7 +61,7 @@ alias rs='bundle exec rails server'
 alias hi='bundle exec hanami'
 alias hs='bundle exec hanami server'
 
-# Load GNU coreutils dircolors (on Linux based systems excluding OS X). 
+# Load GNU coreutils dircolors (on Linux based systems excluding OS X).
 if [ -x /usr/bin/dircolors ]; then
    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
    alias ls='ls --color=auto'
