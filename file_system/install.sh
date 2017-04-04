@@ -11,7 +11,7 @@ info "Starting file system install..."
 create_dir "${HOME}/.v" # Docker volumes dir
 create_dir "${HOME}/Downloads"
 create_dir "${HOME}/Development"
-create_dir "${HOME}/Development/Spike"
+create_dir "${HOME}/Development/Spikes"
 create_dir "${HOME}/Development/Ruby"
 create_dir "${HOME}/Development/Python"
 create_dir "${HOME}/Development/Java"
