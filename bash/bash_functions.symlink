@@ -1,17 +1,17 @@
 #!/bin/bash
 #
-# Place any bash functions in here and they'll get loaded automatically. 
-# Remember to update the bash_funcs method with any new func. details and an 
-# example command showing any args if applicable. 
+# Place any bash functions in here and they'll get loaded automatically.
+# Remember to update the bash_funcs method with any new func. details and an
+# example command showing any args if applicable.
 #
 
-# Prints any methods contained in this file, provides an easy go-to reference. 
+# Prints any methods contained in this file, provides an easy go-to reference.
 bashfuncs () {
     echo ''
     echo 'Bash Functions'
     echo '--------------'
     echo ''
-    
+
     echo 'findhere - Find files in local dir with given glob e.g.'
     echo '           findhere "*.log"'
     echo 'findall  - Find all matching files on file system e.g.'
@@ -39,7 +39,7 @@ bashfuncs () {
     echo 'openrepo - Opens the local dir git repo with $BROWSER'
     echo 'grmb     - Removes a git branch on the remote repository e.g.'
     echo '           grmb origin mybranch'
-    
+
     echo ""
 }
 alias shellfuncs=bashfuncs
@@ -51,17 +51,18 @@ findhere () {
 findall () {
   find / -name "$1"
 }
- 
-finddot () { 
+
+finddot () {
 	find ~ -name ".*" -maxdepth 1 -type l
 }
+alias finddots=finddot
 
 grephere () {
   grep -rni "$1" .
 }
- 
+
 rmds () {
-  find . -name ".DS_Store" -delete
+  find . -name ".DS_Store" -type f -delete
 }
 
 dir () {
@@ -69,9 +70,9 @@ dir () {
 }
 
 manpdf () {
-  man -t "${1}" | open -f -a /Applications/Preview.app/
+  man -t "$1" | open -f -a /Applications/Preview.app/
 }
- 
+
 zipit () {
   zip -r "$1.zip" "$1"
 }
@@ -119,7 +120,7 @@ launch () {
 }
 
 openrepo () {
-  url=$(git remote -v | grep "fetch" | awk '{print $2}' | rev | sed "s/tig.//" | rev)
+  local url=$(git remote -v | grep "fetch" | awk '{print $2}' | rev | sed "s/tig.//" | rev)
   open $url
 }
 

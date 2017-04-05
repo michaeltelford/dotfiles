@@ -1,17 +1,19 @@
 #!/bin/bash
 #
-# Place any bash functions for docker in here and they'll get loaded
-# automatically.
+# Place any docker bash functions here and they'll get loaded automatically.
 #
-# Docker volumes will be stored locally in $VOLUMES (below)
-# You should ensure this gets created in file_system/install.sh
+# Docker volumes will be stored locally in $VOLUMES (below).
+# You should ensure this gets created in ./file_system/install.sh
 #
-# Any DB images should be setup with the creds - user: 'root', pwd: 'pass'.
+# Any images requiring creds should use: $USERNAME and $PASSWORD where
+# possible for consistency.
 #
 
 VOLUMES="$HOME/.v"
+USERNAME=root
+PASSWORD=pass
 
-### Docker executable aliases/functions.
+### Docker executable aliases/functions. ###
 
 dp () {
   docker ps -a "${@}"
@@ -39,7 +41,7 @@ dnv () {
   local curdir=$(pwd -P)
   cd $VOLUMES
   rm -rf *
-  cd curdir
+  cd $curdir
 }
 
 # Removes n number of the latest docker images (see `di` above)
@@ -82,9 +84,9 @@ dapp () {
   local service=$(basename "$PWD")
   local cmd=${1:-"bash"}
   dn # docker nuke func (from above).
-  docker rmi -f service
-  docker build -t service . && \
-    docker run --rm -it --name service \
+  docker rmi -f $service
+  docker build -t $service . && \
+    docker run --rm -it --name $service \
       -p 80:80 \
       -p 8080:8080 \
       -p 4567:4567 \
@@ -93,10 +95,10 @@ dapp () {
       -p 9292:9292 \
       -p 7000:7000 \
       -p 8000:8000 \
-      service $cmd
+      $service $cmd
 }
 
-### Helper methods.
+### Private helper methods. ###
 
 # Simple wrapping method that follows a containers logs.
 _docker_logwrap () {
@@ -117,7 +119,7 @@ _docker_relieson () {
   done
 }
 
-### Image aliases/funcs, inspired by @jfrazelle
+### Image aliases/funcs, inspired by @jfrazelle ###
 
 d_nginx () {
   if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
@@ -133,8 +135,8 @@ d_postgres () {
   if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
   docker run \
     -p 5432:5432 \
-    -e POSTGRES_USER=root \
-    -e POSTGRES_PASSWORD=pass \
+    -e POSTGRES_USER="$USERNAME" \
+    -e POSTGRES_PASSWORD="$PASSWORD" \
     -v $VOLUMES/postgres/data:/var/lib/postgresql/data \
     --name postgres \
     -d \
@@ -145,8 +147,8 @@ d_mysql () {
   if [ "${1}" = "l" ]; then _docker_logwrap "${FUNCNAME[0]}"; return; fi
   docker run \
     -p 3306:3306 \
-    -e MYSQL_USER=root \
-    -e MYSQL_ROOT_PASSWORD=pass \
+    -e MYSQL_USER="$USERNAME" \
+    -e MYSQL_ROOT_PASSWORD="$PASSWORD" \
     -v $VOLUMES/mysql/data:/var/lib/mysql \
     --name mysql \
     -d \
@@ -168,7 +170,7 @@ _d_mongouser () {
   docker exec \
     -it \
     mongo \
-    mongo admin --eval "db.createUser({user: 'root', pwd: 'pass', roles:[{role:'root',db:'admin'}]});"
+    mongo admin --eval "db.createUser({user: '$USERNAME', pwd: '$PASSWORD', roles:[{role:'root',db:'admin'}]});"
 }
 
 d_neo4j () {
