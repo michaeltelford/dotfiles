@@ -67,7 +67,8 @@ dr () {
 }
 
 dei () {
-  docker exec -it ${1} sh
+  local cmd=${2:-"sh"}
+  docker exec -it ${1} $cmd
 }
 
 # Exports the entire container file system to the specified tar file.
@@ -79,6 +80,7 @@ deo () {
 # It is assumed that the docker image name will be the same as the local dir name.
 dapp () {
   local service=$(basename "$PWD")
+  local cmd=${1:-"bash"}
   dn # docker nuke func (from above).
   docker rmi -f service
   docker build -t service . && \
@@ -91,7 +93,7 @@ dapp () {
       -p 9292:9292 \
       -p 7000:7000 \
       -p 8000:8000 \
-      service bash
+      service $cmd
 }
 
 ### Helper methods.
