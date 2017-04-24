@@ -30,7 +30,7 @@ alias bci='brew cask install'
 
 # Git commands.
 alias g='git'
-alias gs='clear; git status'
+alias gs='clear; git status -sb'
 alias gl='git log'
 alias glo='git log --oneline'
 alias glp='git log -p' # shows logs with file changes
@@ -41,6 +41,7 @@ alias gr='git remote -v'
 alias gb='git branch -av' # shows all branches including remote one's
 alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
+alias gac='git add -A && git commit -m'
 alias gfap='git fetch --all --prune' # Updates the remotes branches
 
 # Basic Docker (and Docker Compose) commands.
