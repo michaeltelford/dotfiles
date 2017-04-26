@@ -1,11 +1,12 @@
 #!/bin/bash
 #
-# Set any desired exports below. 
+# Set any desired exports below.
 #
 
-# Exports. 
+# Exports.
+export DOTFILES_ROOT=~/.dotfiles
 export BROWSER='chrome'
-export EDITOR="mate"
+export EDITOR="atom"
 export VISUAL='nano'
 export TERM=xterm-256color
 export LOCALIP="127.0.0.1"
@@ -29,7 +30,8 @@ export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 export TMOUT=0                # auto logout after n seconds of inactivity
 export VIDEO_FORMAT=NTSC            # for use with creating compatible DVDs ('dvdauthor -x dvdauthor.xml' will fail if this not here)
 
-# Conditional exports. 
+# Conditional exports.
+test -d "$DOTFILES_ROOT/bin" && export PATH="$DOTFILES_ROOT/bin:$PATH"
 test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
 test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
 test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH

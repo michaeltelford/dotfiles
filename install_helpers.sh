@@ -2,6 +2,9 @@
 #
 # Helper methods for the install scripts.
 #
+# Much of the functionality in this file has been taken from:
+# https://github.com/holman/dotfiles/blob/master/script/bootstrap
+#
 
 set -e
 
@@ -105,7 +108,7 @@ link_file () {
 
     if [ "$backup" == "true" ]
     then
-      # Only backup if the $dst file isn't a symlink. 
+      # Only backup if the $dst file isn't a symlink.
       if [ -L "$dst" ]
       then
         rm -f "$dst"
