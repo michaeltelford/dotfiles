@@ -5,6 +5,8 @@
 # This means that as I travel back and forth between setting different editors
 # as my default I don't need to keep track of their executable name.
 #
+# This is an executable rather than a bash function because it hangs otherwise.
+#
 # This script came from:
 # https://github.com/holman/dotfiles/blob/master/bin/e
 #
