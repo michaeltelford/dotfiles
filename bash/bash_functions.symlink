@@ -112,7 +112,7 @@ sedit () {
 }
 
 gblogs () {
-  git log --walk-reflogs "$(git rev-parse --abbrev-ref HEAD)"
+  git log --oneline --walk-reflogs "$(git rev-parse --abbrev-ref HEAD)"
 }
 
 launch () {
