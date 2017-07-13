@@ -5,6 +5,7 @@ tap 'caskroom/cask'
 
 brew 'readline'
 brew 'jq'
+brew 'git'
 brew 'node'
 brew 'unrar'
 brew 'wget'

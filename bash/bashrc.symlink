@@ -6,17 +6,17 @@
 
 # Load in extra files if they exist.
 test -f ~/.bash_completion && source ~/.bash_completion
-
 test -f ~/.bash_exports && source ~/.bash_exports
 test -f ~/.bash_aliases && source ~/.bash_aliases
 test -f ~/.bash_functions && source ~/.bash_functions
 
-# Load in any optional temp bash files (good for env specific stuff). 
+# Load in any optional temp bash files (good for env specific stuff).
 test -f ~/.bash_temp_exports && source ~/.bash_temp_exports
 test -f ~/.bash_temp_aliases && source ~/.bash_temp_aliases
 test -f ~/.bash_temp_functions && source ~/.bash_temp_functions
 
 test -f /etc/bash_completion && source /etc/bash_completion
+test -f /usr/local/etc/bash_completion && source /usr/local/etc/bash_completion
 test -f /usr/local/git/contrib/completion/git-completion.bash && source /usr/local/git/contrib/completion/git-completion.bash
 test -f /usr/local/git/contrib/completion/git-prompt.sh && source /usr/local/git/contrib/completion/git-prompt.sh
 test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh
@@ -25,7 +25,7 @@ if test $(which docker); then
   test -f ~/.docker_functions && source ~/.docker_functions
 fi
 
-# Load ps1 behaviour e.g. prompt, colouring etc. 
+# Load ps1 behaviour e.g. prompt, colouring etc.
 if [ "$PS1" ]; then
   test -f ~/.ps1 && source ~/.ps1
 fi
@@ -33,7 +33,7 @@ fi
 # Make 'less' more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# If rbenv is installed, ensure it is initialised. 
-if test $(which rbenv); then 
+# If rbenv is installed, ensure it is initialised.
+if test $(which rbenv); then
   eval "$(rbenv init -)"
 fi
