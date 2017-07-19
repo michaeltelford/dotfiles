@@ -2,13 +2,13 @@
 #
 # Homebrew
 #
-# Installs the Mac OS X package manager. 
-# Updates its indexes and installs the desired dependancies. 
+# Installs the Mac OS X package manager.
+# Updates its indexes and installs the desired dependancies.
 #
 
 info "Starting homebrew install..."
 
-# Check for Homebrew and install if necessary. 
+# Check for Homebrew and install if necessary.
 if test ! $(which brew)
 then
   info "Installing homebrew..."
@@ -24,10 +24,10 @@ then
   fi
 fi
 
-# Update Homebrew.
-brew cleanup && brew update
+# Update Homebrew and installed packages.
+brew cleanup && brew update && brew upgrade
 
-# Install Brewfile containing package dependancies ignoring any failures. 
+# Install Brewfile containing package dependancies ignoring any failures.
 brew bundle --file="$DOTFILES_ROOT/homebrew/Brewfile" || true
 
 success "Homebrew installation complete"
