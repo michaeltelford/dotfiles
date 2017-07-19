@@ -37,5 +37,4 @@ test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
 test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
 test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
 test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
-test $(which go) && export GOROOT=$(which go)
 test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
