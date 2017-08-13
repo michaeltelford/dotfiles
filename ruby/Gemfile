@@ -7,15 +7,16 @@ source 'https://rubygems.org' do
   gem 'thin'
   gem 'json'
   gem 'http'
+  gem 'rsense'
 
   group :development do
     gem 'rb-readline'
     gem 'pry-coolline'
-	gem 'pry'
-	gem 'byebug'
+    gem 'pry'
+    gem 'byebug'
     gem 'hijack'
     gem 'guard'
-	end
+  end
 
   # My own personally developed gems.
   group :personal do
