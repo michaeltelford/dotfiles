@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = /usr/local/bin/mate -w
+        editor = /usr/local/bin/atom -w
 [apply]
         whitespace = nowarn
 [mergetool]

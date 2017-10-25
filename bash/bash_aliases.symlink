@@ -12,7 +12,7 @@ alias down='cd ~/Downloads'
 alias dot='cd ~/.dotfiles'
 alias dev='cd ~/Development'
 alias godev='cd $GOPATH'
-alias spikes='cd ~/Development/Spikes'
+alias spike='cd ~/Development/Spikes'
 
 # Make commands.
 alias m='make'
@@ -39,10 +39,11 @@ alias ga='git add'
 alias gc='git commit'
 alias gr='git remote -v'
 alias gb='git branch -av' # shows all branches including remote one's
+alias glb='git branch' # shows all local branches
 alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
+alias gfap='git fetch --all --prune' # Updates from the remotes branches
 alias gac='git add -A && git commit -m'
-alias gfap='git fetch --all --prune' # Updates the remotes branches
 
 # Basic Docker (and Docker Compose) commands.
 # See docker_functions.symlink for more advanced functionality.
