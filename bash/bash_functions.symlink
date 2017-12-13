@@ -41,6 +41,9 @@ bashfuncs () {
     echo '           grmb origin mybranch'
     echo 'refresh  - Performs a `git fetch --all --prune`, checks out sit'
     echo '           (if present) or master and pulls from the remote'
+    echo 'loadenv  - Exports an ENV file into the current shell session'
+    echo '           Provide a file path or it defaults to "./.env" e.g.'
+    echo '           loadenv "../../.my_env"'
 
     echo ''
 }
@@ -138,4 +141,11 @@ refresh () {
   fi
   git checkout $branch
   git pull
+}
+
+loadenv () {
+    local env_file=${1:-".env"}
+    while read env_var; do
+        export "$env_var"
+    done < "$env_file"
 }
