@@ -60,6 +60,9 @@ alias rat='bundle exec rake test'
 alias rl='bundle exec rails'
 alias rs='bundle exec rails server'
 
+# Hobo commands.
+alias beh='bundle exec hobo'
+
 # Hanami commands.
 alias hi='bundle exec hanami'
 alias hs='bundle exec hanami server'
