@@ -17,6 +17,8 @@ brew 'docker'
 brew 'docker-compose'
 brew 'rbenv'
 brew 'go'
+brew 'dep'
+brew 'go-delve/delve/delve'
 
 cask 'firefox'
 cask 'google-chrome'
