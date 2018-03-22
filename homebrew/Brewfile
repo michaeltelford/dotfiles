@@ -2,6 +2,7 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 tap 'caskroom/cask'
+tap 'go-delve/delve'
 
 brew 'bash'
 brew 'bash-completion'
@@ -18,7 +19,7 @@ brew 'docker-compose'
 brew 'rbenv'
 brew 'go'
 brew 'dep'
-brew 'go-delve/delve/delve'
+brew 'delve'
 
 cask 'firefox'
 cask 'google-chrome'
