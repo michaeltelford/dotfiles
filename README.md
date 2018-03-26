@@ -9,6 +9,7 @@ Quick setup of an awesome development environment on any *nix machine.
 - Homebrew (or Linuxbrew) packages
 - Docker functionality
 - Ruby interpreters (using `rbenv`) and gems
+- Go lang setup ($GOPATH etc.)
 - ...
 
 ## Dependancies
@@ -16,13 +17,11 @@ Quick setup of an awesome development environment on any *nix machine.
 Note: The below dependancies won't be necessary if you're only installing the
 dotfile symlinks.
 
-Both OS X and Linux:
-- git (`brew install libgit2` using Homebrew or a manual install)
-
-Just OS X:
+OS X:
 - xcode (`xcode-select --install` and follow prompt)
 
-Just Linux (using the native package manager):
+Linux (using the native package manager):
+- git
 - bash
 - gawk
 - curl
