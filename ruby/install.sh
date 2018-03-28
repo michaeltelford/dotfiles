@@ -11,7 +11,7 @@ eval "$(rbenv init -)"
 
 # List Ruby versions to install, do NOT add a comma between versions.
 # The LAST version listed will be set as the global default version.
-array=( "2.2.2" "2.4.0" )
+array=( "2.4.0" )
 
 for version in "${array[@]}"
 do
