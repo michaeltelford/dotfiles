@@ -13,6 +13,7 @@ alias back='cd "$OLDPWD"'
 alias dot='cd ~/.dotfiles'
 alias dev='cd ~/Development'
 alias godev='cd $GOPATH'
+alias godevme='cd $GOPATH/src/github.com/michaeltelford'
 alias spike='cd ~/Development/Spikes'
 
 # Make commands.
