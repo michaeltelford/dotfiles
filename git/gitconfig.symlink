@@ -17,6 +17,10 @@
         keepBackup = false
 [difftool]
         prompt = false
+[diff]
+	tool = kdiff3
+[merge]
+	tool = kdiff3
 [help]
         autocorrect = 1
 [push]
