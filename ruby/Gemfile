@@ -26,6 +26,7 @@ source 'https://rubygems.org' do
   group :personal do
     gem 'wgit'
     gem 'rack-jsonparser'
+    gem 'static-site-builder'
   end
 
   # Place any "problematic" gems at the end.
