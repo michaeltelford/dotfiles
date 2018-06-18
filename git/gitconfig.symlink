@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = /usr/local/bin/atom -w
+        editor = /usr/local/bin/code --wait
 [apply]
         whitespace = nowarn
 [mergetool]
