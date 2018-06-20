@@ -144,8 +144,10 @@ refresh () {
 }
 
 loadenv () {
-    local env_file=${1:-".env"}
-    while read env_var; do
-        export "$env_var"
-    done < "$env_file"
+  local env_file=${1:-".env"}
+  while read env_var; do
+    if [ ! -z $env_var ]; then
+      export "$env_var"
+    fi
+  done < "$env_file"
 }
