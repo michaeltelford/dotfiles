@@ -56,20 +56,20 @@ alias d='docker'
 alias dc='docker-compose'
 
 # Ruby commands.
-alias bex='bundle exec'
-alias ra='bundle exec rake'
-alias rat='bundle exec rake test'
+alias be='bundle exec'
+alias ber='bundle exec rake'
+alias bert='bundle exec rake test'
 
 # Rails commands.
-alias rl='bundle exec rails'
-alias rs='bundle exec rails server'
+alias berl='bundle exec rails'
+alias bers='bundle exec rails server'
 
 # Hobo commands.
 alias beh='bundle exec hobo'
 
 # Hanami commands.
-alias hi='bundle exec hanami'
-alias hs='bundle exec hanami server'
+alias behi='bundle exec hanami'
+alias behs='bundle exec hanami server'
 
 # Load GNU coreutils dircolors (on Linux based systems excluding OS X).
 if [ -x /usr/bin/dircolors ]; then
