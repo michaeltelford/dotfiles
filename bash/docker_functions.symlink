@@ -129,6 +129,8 @@ d_nginx () {
     -v $VOLUMES/nginx/html:/usr/share/nginx/html \
     -d \
     nginx
+  echo "Running in daemon mode, place HTML files in: "
+  echo "$VOLUMES/nginx/html"
 }
 
 d_postgres () {
