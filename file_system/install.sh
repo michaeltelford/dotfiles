@@ -2,7 +2,7 @@
 #
 # File System
 #
-# Manipulates the file system e.g. created directories, sets permissions etc.
+# Manipulates the file system e.g. creates directories, sets permissions etc.
 #
 
 info "Starting file system install..."
@@ -17,5 +17,10 @@ create_dir "${HOME}/Development/Python"
 create_dir "${HOME}/Development/Java"
 create_dir "${HOME}/Development/PHP"
 create_dir "${HOME}/Development/Go"
+
+# Create any desired files if they don't yet exist.
+create_file "${DOTFILES_ROOT}/bash/bash_temp_functions.symlink" "#!/bin/bash"
+create_file "${DOTFILES_ROOT}/bash/bash_temp_exports.symlink" "#!/bin/bash"
+create_file "${DOTFILES_ROOT}/bash/bash_temp_aliases.symlink" "#!/bin/bash"
 
 success "File system installation complete"

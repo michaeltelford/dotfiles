@@ -152,6 +152,16 @@ create_dir () {
   fi
 }
 
+create_file () {
+  if [ ! -f "${1}" ]; then
+    info "Creating file: ${1}"
+    touch "${1}"
+    if [ $# -eq 2 ]; then
+      echo "${2}" >> "${1}"
+    fi
+  fi
+}
+
 installed () {
   !(test ! $(which $1))
 }
