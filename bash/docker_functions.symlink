@@ -69,7 +69,7 @@ dr () {
 }
 
 dei () {
-  local cmd=${2:-"sh"}
+  local cmd=${2:-"bash"}
   docker exec -it ${1} $cmd
 }
 
@@ -129,8 +129,9 @@ d_nginx () {
     -v $VOLUMES/nginx/html:/usr/share/nginx/html \
     -d \
     nginx
-  echo "Running in daemon mode, place HTML files in: "
+  echo "Running in daemon mode on port 80, place HTML files in: "
   echo "$VOLUMES/nginx/html"
+  echo "HTML changes are reloaded automatically on page refresh"
 }
 
 d_postgres () {
