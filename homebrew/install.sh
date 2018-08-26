@@ -25,9 +25,14 @@ then
 fi
 
 # Update Homebrew and installed packages.
-brew cleanup && brew update && brew upgrade
+brew cleanup
+brew update
+brew upgrade
 
 # Install Brewfile containing package dependancies ignoring any failures.
 brew bundle --file="$DOTFILES_ROOT/homebrew/Brewfile" || true
+
+# Perform a final clean up having installed new packages.
+brew cleanup
 
 success "Homebrew installation complete"
