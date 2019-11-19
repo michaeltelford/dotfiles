@@ -1,7 +1,7 @@
 # To execute bash on this image, from this dir run:
 #
 # docker rmi -f dotfiles; docker build -t dotfiles . && docker run --rm -it --name dotfiles dotfiles bash
-
+#
 # Then to test new changes run the following in the container bash shell:
 #
 # su default
@@ -9,16 +9,12 @@
 
 FROM debian:wheezy-slim
 
-COPY . /dotfiles
-RUN chmod -R o+rwx /dotfiles
-WORKDIR /dotfiles
-
 RUN apt-get update && apt-get install -y --force-yes \
 		apt-utils \
 		build-essential \
 		python-setuptools \
-    	gawk \
-    	nano \
+    gawk \
+    nano \
 		ruby \
 		curl \
 		bash \
@@ -26,3 +22,9 @@ RUN apt-get update && apt-get install -y --force-yes \
 
 RUN useradd --shell /bin/bash default && \
 	mkdir /home/default && chown default:users /home/default
+
+COPY . /dotfiles
+RUN chmod -R o+rwx /dotfiles
+WORKDIR /dotfiles
+
+CMD [ "bash" ]

@@ -11,6 +11,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = /usr/local/bin/code --wait
+	autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]

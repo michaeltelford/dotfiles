@@ -37,3 +37,6 @@ fi
 if test $(which rbenv); then
   eval "$(rbenv init -)"
 fi
+
+# Added by travis gem
+[ -f /Users/michaeltelford/.travis/travis.sh ] && source /Users/michaeltelford/.travis/travis.sh

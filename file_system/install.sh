@@ -13,10 +13,8 @@ create_dir "${HOME}/Downloads"
 create_dir "${HOME}/Development"
 create_dir "${HOME}/Development/Spikes"
 create_dir "${HOME}/Development/Ruby"
-create_dir "${HOME}/Development/Python"
-create_dir "${HOME}/Development/Java"
-create_dir "${HOME}/Development/PHP"
 create_dir "${HOME}/Development/Go"
+create_dir "${HOME}/Development/V"
 
 # Create any desired files if they don't yet exist.
 create_file "${DOTFILES_ROOT}/bash/bash_temp_functions.symlink" "#!/bin/bash"

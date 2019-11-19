@@ -1,34 +1,19 @@
-source 'https://rubygems.org' do
-  gem 'bundler'
-  gem 'rake'
-  gem 'rack'
-  gem 'sinatra'
-  gem 'hanami'
-  gem 'rails', '>=5.0.0'
-  gem 'hobo'
-  gem 'thin'
-  gem 'json'
-  gem 'http'
-  gem 'httparty'
-  gem 'rsense'
+source 'https://rubygems.org'
 
-  group :development do
-    gem 'rb-readline'
-    gem 'pry-coolline'
-    gem 'pry'
-    gem 'byebug'
-    gem 'hijack'
-    gem 'guard'
-    gem 'yard'
-  end
+gem 'bundler'
+gem 'rake'
+gem 'rack'
+gem 'sinatra'
+gem 'rails', '>=5.0.0'
 
-  # My own personally developed gems.
-  group :personal do
-    gem 'wgit'
-    gem 'rack-jsonparser'
-    gem 'static-site-builder'
-  end
-
-  # Place any "problematic" gems at the end.
-  gem 'nokogiri' # `xcode-select --install` should be complete on mac os x.
+group :development do
+  gem 'rb-readline'
+  gem 'pry-coolline'
+  gem 'pry'
+  gem 'byebug'
+  gem 'yard'
+  gem 'maxitest'
 end
+
+# Place any "problematic" gems at the end.
+gem 'nokogiri' # `xcode-select --install` should be complete on Mac OS X.

@@ -20,16 +20,6 @@ alias spike='cd ~/Development/Spikes'
 alias m='make'
 alias mi='make install'
 
-# Brew commands.
-alias b='brew'
-alias bs='brew search'
-alias bi='brew install'
-
-# Brew Cask commands.
-alias bc='brew cask'
-alias bcs='brew cask search'
-alias bci='brew cask install'
-
 # Git commands.
 alias g='git'
 alias gs='clear; git status -sb'
@@ -64,12 +54,18 @@ alias bert='bundle exec rake test'
 alias berl='bundle exec rails'
 alias bers='bundle exec rails server'
 
-# Hobo commands.
-alias beh='bundle exec hobo'
+# Mac OS X specific commands.
+if test "$(uname)" = "Darwin"; then
+  # Brew commands.
+  alias b='brew'
+  alias bs='brew search'
+  alias bi='brew install'
 
-# Hanami commands.
-alias behi='bundle exec hanami'
-alias behs='bundle exec hanami server'
+  # Brew Cask commands.
+  alias bc='brew cask'
+  alias bcs='brew cask search'
+  alias bci='brew cask install'
+fi
 
 # Load GNU coreutils dircolors (on Linux based systems excluding OS X).
 if [ -x /usr/bin/dircolors ]; then
