@@ -38,5 +38,10 @@ if test $(which rbenv); then
   eval "$(rbenv init -)"
 fi
 
-# Added by travis gem
+# Added by the 'travis' gem.
 [ -f /Users/michaeltelford/.travis/travis.sh ] && source /Users/michaeltelford/.travis/travis.sh
+
+# Added by the 'toys' gem.
+if test $(which toys); then
+  eval "$(toys system bash-completion install)"
+fi

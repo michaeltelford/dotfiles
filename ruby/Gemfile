@@ -1,18 +1,19 @@
 source 'https://rubygems.org'
 
 gem 'bundler'
-gem 'rake'
 gem 'rack'
-gem 'sinatra'
 gem 'rails', '>=5.0.0'
+gem 'rake'
+gem 'sinatra'
 
 group :development do
-  gem 'rb-readline'
-  gem 'pry-coolline'
-  gem 'pry'
   gem 'byebug'
-  gem 'yard'
   gem 'maxitest'
+  gem 'pry'
+  gem 'pry-coolline'
+  gem 'rb-readline'
+  gem 'toys'
+  gem 'yard'
 end
 
 # Place any "problematic" gems at the end.
