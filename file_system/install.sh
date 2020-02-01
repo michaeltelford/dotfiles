@@ -15,6 +15,7 @@ create_dir "${HOME}/Development/Spikes"
 create_dir "${HOME}/Development/Ruby"
 create_dir "${HOME}/Development/Go"
 create_dir "${HOME}/Development/V"
+create_dir "${HOME}/Development/Javascript"
 
 # Create any desired files if they don't yet exist.
 create_file "${DOTFILES_ROOT}/bash/bash_temp_functions.symlink" "#!/bin/bash"
