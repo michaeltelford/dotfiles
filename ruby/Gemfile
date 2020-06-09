@@ -2,9 +2,7 @@ source 'https://rubygems.org'
 
 gem 'bundler'
 gem 'rack'
-gem 'rails', '>=5.0.0'
 gem 'rake'
-gem 'sinatra'
 
 group :development do
   gem 'byebug'
@@ -15,6 +13,3 @@ group :development do
   gem 'toys'
   gem 'yard'
 end
-
-# Place any "problematic" gems at the end.
-gem 'nokogiri' # `xcode-select --install` should be complete on Mac OS X.

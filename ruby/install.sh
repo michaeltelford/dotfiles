@@ -11,7 +11,7 @@ eval "$(rbenv init -)"
 
 # List Ruby versions to install, do NOT add a comma between versions.
 # The LAST version listed will be set as the global default version.
-array=( "2.5.3" )
+array=( "2.7.0" )
 
 for version in "${array[@]}"
 do
@@ -35,7 +35,6 @@ info "Running 'bundle install'..."
 gem update --system
 gem install bundler
 
-bundle config build.nokogiri --use-system-libraries
 bundle install --gemfile "$DOTFILES_ROOT/ruby/Gemfile" --jobs 3 || true
 
 success "Ruby installation complete"
