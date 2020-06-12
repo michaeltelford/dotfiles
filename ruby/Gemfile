@@ -10,6 +10,7 @@ group :development do
   gem 'pry'
   gem 'pry-coolline'
   gem 'rb-readline'
+  gem 'amazing_print'
   gem 'toys'
   gem 'yard'
 end

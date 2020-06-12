@@ -1,0 +1,6 @@
+begin
+  require 'amazing_print'
+  AmazingPrint.irb!
+rescue LoadError
+  # Do nothing if amazing_print isn't installed.
+end

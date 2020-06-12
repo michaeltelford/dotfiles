@@ -1,0 +1,6 @@
+begin
+  require 'amazing_print'
+  AmazingPrint.pry!
+rescue LoadError
+  # Do nothing if amazing_print isn't installed.
+end
