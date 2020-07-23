@@ -126,11 +126,10 @@ d_nginx () {
   docker run \
     -p 80:80 \
     --name nginx \
-    -v $VOLUMES/nginx/html:/usr/share/nginx/html \
+    -v ${PWD}:/usr/share/nginx/html \
     -d \
     nginx
-  echo "Running in daemon mode on port 80, place HTML files in: "
-  echo "$VOLUMES/nginx/html"
+  echo "Running in daemon mode on port 80, serving the local directory"
   echo "HTML changes are reloaded automatically on page refresh"
 }
 
