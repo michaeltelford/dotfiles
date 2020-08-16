@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = /usr/bin/code --wait
+        editor = $(which code) --wait
 	autocrlf = input
 [apply]
         whitespace = nowarn
