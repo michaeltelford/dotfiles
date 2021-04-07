@@ -46,6 +46,15 @@ bashfuncs () {
     echo '           loadenv "../../.my_env"'
 
     echo ''
+    echo 'Ubuntu Functions'
+    echo '----------------'
+    echo ''
+
+    echo 'suspend - Suspend/hibernate the machine'
+    echo 'lports  - List all open ports and their PIDs, use `kill <PID>` to close the port'
+    echo 'rwifi   - Hard restart the WIFI adapter, useful for re-connecting due to driver issues'
+
+    echo ''
 }
 alias shellfuncs=bashfuncs
 
@@ -150,4 +159,20 @@ loadenv () {
       export "$env_var"
     fi
   done < "$env_file"
+}
+
+# Ubuntu Functions
+
+suspend () {
+  systemctl suspend
+}
+
+lports () {
+  lsof -i -P -n | grep LISTEN
+}
+
+rwifi () {
+  nmcli radio wifi off
+  sleep 1 # wait for 1 second before turning the adapter back on
+  nmcli radio wifi on
 }
