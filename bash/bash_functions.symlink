@@ -52,7 +52,7 @@ bashfuncs () {
 
     echo 'suspend - Suspend/hibernate the machine'
     echo 'lports  - List all open ports and their PIDs, use `kill <PID>` to close the port'
-    echo 'rwifi   - Hard restart the WIFI adapter, useful for re-connecting due to driver issues'
+    echo 'rwifi   - Hard re-start/connect the WIFI adapter (useful for driver issues)'
 
     echo ''
 }
