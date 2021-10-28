@@ -40,3 +40,7 @@ test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
 test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
 test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
 test -d ~/Development/vlang && export PATH=~/Development/vlang:$PATH
+test -d ~/linuxbrew/.linuxbrew/binexport && export PATH=~/linuxbrew/.linuxbrew/bin:$PATH
+
+export PATH="$HOME/.crenv/bin:$PATH"
+eval "$(crenv init -)"
