@@ -12,9 +12,9 @@ alias down='cd ~/Downloads'
 alias back='cd "$OLDPWD"'
 alias dot='cd ~/.dotfiles'
 alias dev='cd ~/Development'
+alias spike='cd ~/Development/Spikes'
 alias godev='cd $GOPATH'
 alias godevme='cd $GOPATH/src/github.com/michaeltelford'
-alias spike='cd ~/Development/Spikes'
 
 # Make commands.
 alias m='make'
@@ -45,14 +45,15 @@ alias gac='git add -A && git commit -m'
 alias d='docker'
 alias dc='docker-compose'
 
+# Kubernetes commands.
+alias mk='minikube'
+alias k='kubectl'
+
 # Ruby commands.
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bert='bundle exec rake test'
-
-# Rails commands.
 alias berl='bundle exec rails'
-alias bers='bundle exec rails server'
 
 # Mac OS X specific commands.
 if test "$(uname)" = "Darwin"; then
@@ -60,11 +61,6 @@ if test "$(uname)" = "Darwin"; then
   alias b='brew'
   alias bs='brew search'
   alias bi='brew install'
-
-  # Brew Cask commands.
-  alias bc='brew cask'
-  alias bcs='brew cask search'
-  alias bci='brew cask install'
 fi
 
 # Load GNU coreutils dircolors (on Linux based systems excluding OS X).
