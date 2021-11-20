@@ -11,9 +11,9 @@ eval "$(rbenv init -)"
 
 # List Ruby versions to install, do NOT add a comma between versions.
 # The LAST version listed will be set as the global default version.
-array=( "2.7.0" )
+versions=( "3.0.2" "2.7.4" )
 
-for version in "${array[@]}"
+for version in "${versions[@]}"
 do
 	if rbenv versions | grep -q $version
 	then
@@ -25,7 +25,7 @@ do
 done
 
 # Set the global Ruby version.
-VERSION=${array[${#array[@]}-1]}
+VERSION=${versions[${#versions[@]}-1]}
 info "Setting global ruby version to $VERSION..."
 rbenv global $VERSION
 
