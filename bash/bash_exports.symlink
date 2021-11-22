@@ -35,15 +35,12 @@ test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
 test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
 test -d /home/linuxbrew/.linuxbrew/bin && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 test -d /home/linuxbrew/.linuxbrew/sbin && export PATH=/home/linuxbrew/.linuxbrew/sbin:$PATH
-test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
-test -f /usr/local/bin/mysql/bin && export PATH=/usr/local/mysql/bin:$PATH
-test -f /usr/local/go/bin/go && export PATH=/usr/local/go/bin:$PATH
-test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
-test -d ~/Development/vlang && export PATH=~/Development/vlang:$PATH
 test -d ~/linuxbrew/.linuxbrew/binexport && export PATH=~/linuxbrew/.linuxbrew/bin:$PATH
+test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
+# test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
 
 # export PATH="$HOME/.crenv/bin:$PATH"
 # eval "$(crenv init -)"
 
 # Setup homebrew in the shell.
-eval "$(/opt/homebrew/bin/brew shellenv)"
+test -d /opt/homebrew/bin/brew && eval "$(/opt/homebrew/bin/brew shellenv)"
