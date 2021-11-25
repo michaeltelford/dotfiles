@@ -48,6 +48,7 @@ alias dc='docker-compose'
 # Kubernetes commands.
 alias mk='minikube'
 alias k='kubectl'
+alias h='helm'
 
 # Ruby commands.
 alias be='bundle exec'
