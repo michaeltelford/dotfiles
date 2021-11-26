@@ -29,7 +29,7 @@ export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 export TMOUT=0                # auto logout after n seconds of inactivity
 export VIDEO_FORMAT=NTSC            # for use with creating compatible DVDs ('dvdauthor -x dvdauthor.xml' will fail if this not here)
 
-# Conditional exports.
+# Conditional exports etc.
 test -d "$DOTFILES_ROOT/bin" && export PATH="$DOTFILES_ROOT/bin:$PATH"
 test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
 test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
@@ -37,10 +37,6 @@ test -d /home/linuxbrew/.linuxbrew/bin && export PATH=/home/linuxbrew/.linuxbrew
 test -d /home/linuxbrew/.linuxbrew/sbin && export PATH=/home/linuxbrew/.linuxbrew/sbin:$PATH
 test -d ~/linuxbrew/.linuxbrew/binexport && export PATH=~/linuxbrew/.linuxbrew/bin:$PATH
 test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
-# test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
-
-# export PATH="$HOME/.crenv/bin:$PATH"
-# eval "$(crenv init -)"
-
-# Setup homebrew in the shell.
-test -d /opt/homebrew/bin/brew && eval "$(/opt/homebrew/bin/brew shellenv)"
+test -d ~/Development/Go && export GOPATH=~/Development/Go && PATH=$GOPATH/bin:$PATH
+test -d /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
+test -d ~/.crenv/bin && export PATH=~/.crenv/bin:$PATH && eval $(crenv init -)
