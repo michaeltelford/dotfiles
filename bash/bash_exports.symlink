@@ -3,7 +3,7 @@
 # Set any desired exports below.
 #
 
-# Exports.
+# Standard exports.
 export DOTFILES_ROOT=~/.dotfiles
 export BROWSER='chrome'
 export EDITOR="code"
@@ -29,16 +29,5 @@ export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
 export TMOUT=0                # auto logout after n seconds of inactivity
 export VIDEO_FORMAT=NTSC            # for use with creating compatible DVDs ('dvdauthor -x dvdauthor.xml' will fail if this not here)
 
-# Conditional exports etc.
-test -d "$DOTFILES_ROOT/bin" && export PATH="$DOTFILES_ROOT/bin:$PATH"
-test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
-test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
-test -d /home/linuxbrew/.linuxbrew/bin && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-test -d /home/linuxbrew/.linuxbrew/sbin && export PATH=/home/linuxbrew/.linuxbrew/sbin:$PATH
-test -d ~/linuxbrew/.linuxbrew/binexport && export PATH=~/linuxbrew/.linuxbrew/bin:$PATH
-test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
-test -d ~/Development/Go && export GOPATH=~/Development/Go && export PATH=$GOPATH/bin:$PATH
-test -d /usr/local/go && export GOROOT=/usr/local/go && export PATH=$GOROOT/bin:$PATH
-test -d /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
-test -d ~/.crenv/bin && export PATH=~/.crenv/bin:$PATH && eval $(crenv init -)
-test -d ~/.rbenv/bin && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)"
+# Other exports.
+export NVM_DIR="$HOME/.nvm"

@@ -15,11 +15,25 @@ test -f ~/.bash_temp_exports && source ~/.bash_temp_exports
 test -f ~/.bash_temp_aliases && source ~/.bash_temp_aliases
 test -f ~/.bash_temp_functions && source ~/.bash_temp_functions
 
+# Load in everything else...
 test -f /etc/bash_completion && source /etc/bash_completion
 test -f /usr/local/etc/bash_completion && source /usr/local/etc/bash_completion
 test -f /usr/local/git/contrib/completion/git-completion.bash && source /usr/local/git/contrib/completion/git-completion.bash
 test -f /usr/local/git/contrib/completion/git-prompt.sh && source /usr/local/git/contrib/completion/git-prompt.sh
 test -f /usr/local/bin/virtualenvwrapper.sh && source /usr/local/bin/virtualenvwrapper.sh
+
+test -d "$DOTFILES_ROOT/bin" && export PATH="$DOTFILES_ROOT/bin:$PATH"
+test -d ~/.linuxbrew/bin && export PATH=~/.linuxbrew/bin:$PATH
+test -d ~/.linuxbrew/sbin && export PATH=~/.linuxbrew/sbin:$PATH
+test -d /home/linuxbrew/.linuxbrew/bin && export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+test -d /home/linuxbrew/.linuxbrew/sbin && export PATH=/home/linuxbrew/.linuxbrew/sbin:$PATH
+test -d ~/linuxbrew/.linuxbrew/binexport && export PATH=~/linuxbrew/.linuxbrew/bin:$PATH
+test -d /usr/local/sbin && export PATH=/usr/local/sbin:$PATH
+test -d ~/Development/Go && export GOPATH=~/Development/Go && export PATH=$GOPATH/bin:$PATH
+test -d /usr/local/go && export GOROOT=/usr/local/go && export PATH=$GOROOT/bin:$PATH
+test -d /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
+test -d ~/.crenv/bin && export PATH=~/.crenv/bin:$PATH && eval $(crenv init -)
+test -d ~/.rbenv/bin && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)"
 
 if test $(which docker); then
   test -f ~/.docker_functions && source ~/.docker_functions
@@ -32,6 +46,11 @@ fi
 
 # Make 'less' more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# If direnv is installed, ensure it is initialised.
+if test $(which direnv); then
+  eval "$(direnv hook bash)"
+fi
 
 # If rbenv is installed, ensure it is initialised.
 if test $(which rbenv); then
@@ -46,6 +65,6 @@ if test $(which toys); then
   eval "$(toys system bash-completion install)"
 fi
 
-export NVM_DIR="$HOME/.nvm"
+# NVM && NPM
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

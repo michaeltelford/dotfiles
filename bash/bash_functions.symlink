@@ -44,6 +44,7 @@ bashfuncs () {
     echo 'loadenv  - Exports an ENV file into the current shell session'
     echo '           Provide a file path or it defaults to "./.env" e.g.'
     echo '           loadenv "../../.my_env"'
+    echo 'lports   - List all open ports and their PIDs, use `kill <PID>` to close a port'
 
     echo ''
     echo 'Ubuntu Functions'
@@ -51,7 +52,6 @@ bashfuncs () {
     echo ''
 
     echo 'suspend - Suspend/hibernate the machine'
-    echo 'lports  - List all open ports and their PIDs, use `kill <PID>` to close the port'
     echo 'rwifi   - Hard re-start/connect the WIFI adapter (useful for driver issues)'
 
     echo ''
@@ -161,14 +161,14 @@ loadenv () {
   done < "$env_file"
 }
 
+lports () {
+  lsof -i -P -n | grep LISTEN
+}
+
 # Ubuntu Functions
 
 suspend () {
   systemctl suspend
-}
-
-lports () {
-  lsof -i -P -n | grep LISTEN
 }
 
 rwifi () {
