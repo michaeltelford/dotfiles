@@ -7,54 +7,55 @@
 
 # Prints any methods contained in this file, provides an easy go-to reference.
 bashfuncs () {
-    echo ''
-    echo 'Bash Functions'
-    echo '--------------'
-    echo ''
+  echo ''
+  echo 'Bash Functions'
+  echo '--------------'
+  echo ''
 
-    echo 'findhere - Find files in local dir with given glob e.g.'
-    echo '           findhere "*.log"'
-    echo 'findall  - Find all matching files on file system e.g.'
-    echo '           findall "docker"'
-    echo 'finddot  - Find all dotfile symlinks in the home folder'
-    echo 'search   - Grep recursively for pattern in local dir e.g.'
-    echo '           search "My Project"'
-    echo 'rmds     - Recursively remove all .DS_Store files from local dir'
-    echo 'dir      - Create a dir in the local dir and cd into it e.g.'
-    echo '           dir newproject'
-    echo 'manpdf   - Open man page as PDF without saving it anywhere e.g.'
-    echo '           manpdf ls'
-    echo 'zipit    - Zip a file in the local dir e.g.'
-    echo '           zipit newproject'
-    echo 'extract  - Extracts archived files / mounts disk images e.g.'
-    echo '           extract newproject.zip'
-    echo 'sshi     - SSH using the identity file ~/.ssh/id_rsa e.g.'
-    echo '           sshi user@server.com'
-    echo 'sedit    - Replace all instances of X with Y in file Z e.g.'
-    echo '           sedit "hello" "ciao" myfile.txt'
-    echo 'gblogs   - Display logs of current branch starting with the last'
-    echo '           commit when the branch was created'
-    echo 'launch   - Launches a Mac OS X application e.g.'
-    echo '           launch calculator'
-    echo 'openrepo - Opens the local dir git repo with $BROWSER'
-    echo 'grmb     - Removes a git branch on the remote repository e.g.'
-    echo '           grmb origin mybranch'
-    echo 'refresh  - Performs a `git fetch --all --prune`, checks out sit'
-    echo '           (if present) or master and pulls from the remote'
-    echo 'loadenv  - Exports an ENV file into the current shell session'
-    echo '           Provide a file path or it defaults to "./.env" e.g.'
-    echo '           loadenv "../../.my_env"'
-    echo 'lports   - List all open ports and their PIDs, use `kill <PID>` to close a port'
+  echo 'findhere - Find files in local dir with given glob e.g.'
+  echo '           findhere "*.log"'
+  echo 'findall  - Find all matching files on file system e.g.'
+  echo '           findall "docker"'
+  echo 'finddot  - Find all dotfile symlinks in the home folder'
+  echo 'search   - Grep recursively for pattern in local dir e.g.'
+  echo '           search "My Project"'
+  echo 'rmds     - Recursively remove all .DS_Store files from local dir'
+  echo 'dir      - Create a dir in the local dir and cd into it e.g.'
+  echo '           dir newproject'
+  echo 'manpdf   - Open man page as PDF without saving it anywhere e.g.'
+  echo '           manpdf ls'
+  echo 'zipit    - Zip a file in the local dir e.g.'
+  echo '           zipit newproject'
+  echo 'extract  - Extracts archived files / mounts disk images e.g.'
+  echo '           extract newproject.zip'
+  echo 'sshi     - SSH using the identity file ~/.ssh/id_rsa e.g.'
+  echo '           sshi user@server.com'
+  echo 'sedit    - Replace all instances of X with Y in file Z e.g.'
+  echo '           sedit "hello" "ciao" myfile.txt'
+  echo 'gblogs   - Display logs of current branch starting with the last'
+  echo '           commit when the branch was created'
+  echo 'launch   - Launches a Mac OS X application e.g.'
+  echo '           launch calculator'
+  echo 'openrepo - Opens the local dir git repo with $BROWSER'
+  echo 'grmb     - Removes a git branch on the remote repository e.g.'
+  echo '           grmb origin mybranch'
+  echo 'refresh  - Performs a `git fetch --all --prune`, checks out $1 or master'
+  echo '           and pulls from the remote e.g.'
+  echo '           refresh mybranch'
+  echo 'loadenv  - Exports an ENV file into the current shell session'
+  echo '           Provide a file path or it defaults to "./.env" e.g.'
+  echo '           loadenv "../../.my_env"'
+  echo 'lports   - List all open ports and their PIDs, use `kill <PID>` to close a port'
 
-    echo ''
-    echo 'Ubuntu Functions'
-    echo '----------------'
-    echo ''
+  echo ''
+  echo 'Ubuntu Functions'
+  echo '----------------'
+  echo ''
 
-    echo 'suspend - Suspend/hibernate the machine'
-    echo 'rwifi   - Hard re-start/connect the WIFI adapter (useful for driver issues)'
+  echo 'suspend - Suspend/hibernate the machine'
+  echo 'rwifi   - Hard re-start/connect the WIFI adapter (useful for driver issues)'
 
-    echo ''
+  echo ''
 }
 alias shellfuncs=bashfuncs
 
@@ -144,10 +145,7 @@ grmb () {
 
 refresh () {
   git fetch --all --prune
-  local branch="master"
-  if git branch | grep "sit"; then
-    branch="sit"
-  fi
+  local branch=${1:-"master"}
   git checkout $branch
   git pull
 }
