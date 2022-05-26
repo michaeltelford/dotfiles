@@ -135,7 +135,10 @@ launch () {
 }
 
 openrepo () {
-  local url=$(git remote -v | grep "origin" | awk 'FNR == 1 {print $2}' | rev | sed "s/tig.//" | rev)
+  local url=$(git remote -v | grep "origin" | awk 'FNR == 1 {print $2}')
+  if [[ "$url" == *"git@"* ]]; then
+    url=$(echo $url | sed "s|:|/|" | sed "s|git@|https://|")
+  fi
   open $url
 }
 
@@ -153,9 +156,7 @@ refresh () {
 loadenv () {
   local env_file=${1:-".env"}
   while read env_var; do
-    if [ ! -z $env_var ]; then
-      export "$env_var"
-    fi
+    export "$env_var"
   done < "$env_file"
 }
 
