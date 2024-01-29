@@ -1,4 +1,3 @@
-
 # Dotfiles
 
 Quick setup of an awesome development environment on any *nix machine.
@@ -111,7 +110,5 @@ This will mask any errors and allow the install process to continue.
 
 Thanks must go to:
 
-- Pete McConnell's [dotfiles](https://github.com/pemcconnell/.dotfiles) for providing much of the initial bash functionality and introducing me to dotfiles.
 - Jess Frazelle's [docker](https://github.com/jessfraz) functionality.
-- Lars Kappert's [tutorial](https://medium.com/@webprolific/getting-started-with-dotfiles-43c3602fd789#.ecldsw9d9) on dotfiles development in general.
 - Zach Holman's [dotfiles](https://github.com/holman/dotfiles) for the approach of easily extending a dotfile repository and some awesome code. Also see his cool [article](https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/) on dotfiles.
