@@ -12,6 +12,8 @@ bashfuncs () {
   echo '--------------'
   echo ''
 
+  echo 'up       - Change up a directory N times (default: 1) e.g.'
+  echo '           up 2'
   echo 'findhere - Find files in local dir with given glob e.g.'
   echo '           findhere "*.log"'
   echo 'findall  - Find all matching files on file system e.g.'
@@ -58,6 +60,13 @@ bashfuncs () {
   echo ''
 }
 alias shellfuncs=bashfuncs
+
+up () {
+  local n=${1:-1}
+  for i in $(seq $n); do
+    cd ..
+  done
+}
 
 findhere () {
 	find . -name "$1"

@@ -7,7 +7,6 @@ alias c='clear'
 
 # File system commands.
 alias home='cd ~'
-alias up='cd ..'
 alias down='cd ~/Downloads'
 alias back='cd "$OLDPWD"'
 alias dot='cd ~/.dotfiles'
