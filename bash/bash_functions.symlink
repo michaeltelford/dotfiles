@@ -162,6 +162,29 @@ refresh () {
   git pull
 }
 
+# $1 = main_branch, $2 = dev_branch
+# Use like:
+# local dev_branch="${2:-master}"
+# _pull_repo "master" $dev_branch
+_pull_repo() {
+    gfap
+    g stash | grep "No local changes to save"
+    local stash_result="$?"
+
+    printf "\nPulling main branch $1...\n"
+    gch "$1"
+    g pull
+
+    if [ "$1" != "$2" ]; then
+        printf "\nPulling dev branch $2...\n"
+        gch "$2" && g pull
+    fi
+
+    if [ $stash_result -eq 1 ]; then
+      g stash apply
+    fi
+}
+
 loadenv () {
   local env_file=${1:-".env"}
   while read env_var; do

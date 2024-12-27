@@ -55,6 +55,10 @@ alias ber='bundle exec rake'
 alias bert='bundle exec rake test'
 alias berl='bundle exec rails'
 
+# Golang commands.
+alias gmv='go mod vendor'
+alias gmt='go mod tidy'
+
 # Mac OS X specific commands.
 if test "$(uname)" = "Darwin"; then
   # Brew commands.
