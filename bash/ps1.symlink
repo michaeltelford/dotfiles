@@ -46,4 +46,4 @@ if [ "$PS1" ]; then # if running interactively, then run till 'fi' at EOF:
 	COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 	complete -cf sudo
 
-fi  # end interactive check﻿
+fi  # end interactive check
