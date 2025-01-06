@@ -14,8 +14,7 @@ create_dir "${HOME}/Development"
 create_dir "${HOME}/Development/Spikes"
 create_dir "${HOME}/Development/Ruby"
 create_dir "${HOME}/Development/Crystal"
-create_dir "${HOME}/Development/Go"
-create_dir "${HOME}/Development/V"
+create_dir "${HOME}/Development/Go/github.com/michaeltelford"
 create_dir "${HOME}/Development/Javascript"
 
 # Create any desired files if they don't yet exist.
