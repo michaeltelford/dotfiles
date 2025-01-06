@@ -1,3 +1,5 @@
+# For testing these dotfiles on a debian docker image
+#
 # To execute bash on this image, from this dir run:
 #
 # docker rmi -f dotfiles; docker build -t dotfiles . && docker run --rm -it --name dotfiles dotfiles bash
@@ -6,6 +8,7 @@
 #
 # su default
 # make install (or otherwise)
+#
 
 FROM debian:wheezy-slim
 

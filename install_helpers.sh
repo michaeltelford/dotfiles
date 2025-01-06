@@ -127,7 +127,7 @@ link_file () {
   if [ "$skip" != "true" ]  # "false" or empty
   then
     ln -s "$1" "$2"
-    success "Sym linked $1 to $2"
+    success "Sym linked $1 -> $2"
   fi
 }
 

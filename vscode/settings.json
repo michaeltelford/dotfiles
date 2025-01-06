@@ -1,0 +1,70 @@
+{
+    "window.newWindowProfile": "Default",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.fontSize": 18,
+    "go.testOnSave": true,
+    "workbench.startupEditor": "none",
+    "editor.inlineSuggest.enabled": true,
+    "terminal.explorerKind": "external",
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontSize": 16,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "editor.accessibilitySupport": "off",
+    "editor.detectIndentation": false,
+    "[sass]": {
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.formatOnType": true
+    },
+    "[cr]": {
+        "editor.tabSize": 2
+    },
+    "[rb]": {
+        "editor.tabSize": 2
+    },
+    "[go]": {
+        "editor.tabSize": 4
+    },
+    "editor.wordWrap": "on",
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.trimAutoWhitespace": false,
+    "rest-client.enableTelemetry": false,
+    "rest-client.previewOption": "exchange",
+    "go.toolsManagement.autoUpdate": true,
+    "update.showReleaseNotes": false,
+    "[ruby]": {
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "editor.tabSize": 2
+    },
+    "gitlens.rebaseEditor.ordering": "asc",
+    "editor.largeFileOptimizations": false,
+    "typescript.updateImportsOnFileMove.enabled": "always"
+}
