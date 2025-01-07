@@ -3,8 +3,10 @@
 # VSCode
 #
 # Sets up VSCode with your preferred settings, extensions etc.
+# Assumes 'code' aleady exists in $PATH - see homebrew topic.
 #
 
+# Install your preferred VSCode settings.
 install_settings () {
     info "Installing your preferred VSCode settings..."
 
@@ -12,17 +14,22 @@ install_settings () {
     link_file "$DOTFILES_ROOT/vscode/settings.json" "/Users/michaeltelford/Library/Application Support/Code/User/settings.json"
 }
 
+# Install your preferred VSCode extensions.
+install_extensions () {
+    if test $(which code); then
+        info "Installing VSCode extensions..."
+
+        code --install-extension eamodio.gitlens --force
+        code --install-extension mohsen1.prettify-json --force
+        code --install-extension humao.rest-client --force
+        code --install-extension golang.go --force
+        code --install-extension shopify.ruby-lsp --force
+    fi
+}
+
 info "Starting VSCode install..."
 
-# Install your preferred VSCode settings.
 install_settings
-
-# Install your preferred VSCode extensions.
-info "Manually search for and install the following VSCode extensions:"
-info "  - prettify json"
-info "  - rest-client"
-info "  - gitlens"
-info "  - go"
-info "  - ruby lsp"
+install_extensions
 
 success "VSCode installation complete"
