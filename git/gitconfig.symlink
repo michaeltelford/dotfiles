@@ -11,7 +11,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = $(which code) --wait
-	autocrlf = input
+	    autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -19,9 +19,9 @@
 [difftool]
         prompt = false
 [diff]
-	tool = kdiff3
+	    tool = kdiff3
 [merge]
-	tool = kdiff3
+	    tool = kdiff3
 [help]
         autocorrect = 1
 [push]
@@ -31,4 +31,4 @@
         # Setting to git 2.0 default to suppress warning message
         default = simple
 [pull]
-	rebase = false
+	    rebase = false

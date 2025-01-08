@@ -66,5 +66,6 @@
     },
     "gitlens.rebaseEditor.ordering": "asc",
     "editor.largeFileOptimizations": false,
-    "typescript.updateImportsOnFileMove.enabled": "always"
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorTheme": "Default Dark+"
 }

@@ -16,6 +16,7 @@ brew 'awscli'
 brew 'node'
 brew 'rbenv'
 brew 'go'
+brew 'pyenv'
 
 cask 'iterm2'
 cask 'firefox'
