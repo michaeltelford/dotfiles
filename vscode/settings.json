@@ -67,5 +67,8 @@
     "gitlens.rebaseEditor.ordering": "asc",
     "editor.largeFileOptimizations": false,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "workbench.colorTheme": "Default Dark+"
+    "workbench.colorTheme": "Default Dark+",
+    "files.exclude": {
+        "**/.git": false
+    }
 }
