@@ -41,8 +41,8 @@ bashfuncs () {
   echo 'openrepo - Opens the local dir git repo with $BROWSER'
   echo 'grmb     - Removes a git branch on the remote repository e.g.'
   echo '           grmb origin mybranch'
-  echo 'refresh  - Performs a `git fetch --all --prune`, checks out $1 or master'
-  echo '           and pulls from the remote e.g.'
+  echo 'refresh  - Performs a `git fetch --all --prune`, checks out $1, main or'
+  echo '           master and pulls from the remote e.g.'
   echo '           refresh mybranch'
   echo 'loadenv  - Exports an ENV file into the current shell session'
   echo '           Provide a file path or it defaults to "./.env" e.g.'
@@ -156,10 +156,12 @@ grmb () {
 }
 
 refresh () {
+  local branch=${1:-"main"}
   git fetch --all --prune
-  local branch=${1:-"master"}
-  git checkout $branch
-  git pull
+  git checkout $branch || git checkout main || git checkout master
+  if [ $? -eq 0 ]; then
+    git pull
+  fi
 }
 
 # $1 = main_branch, $2 = dev_branch
@@ -167,22 +169,22 @@ refresh () {
 # local dev_branch="${2:-master}"
 # _pull_repo "master" $dev_branch
 _pull_repo() {
-    gfap
-    g stash | grep "No local changes to save"
-    local stash_result="$?"
+  gfap
+  g stash | grep "No local changes to save"
+  local stash_result="$?"
 
-    printf "\nPulling main branch $1...\n"
-    gch "$1"
-    g pull
+  printf "\nPulling main branch $1...\n"
+  gch "$1"
+  g pull
 
-    if [ "$1" != "$2" ]; then
-        printf "\nPulling dev branch $2...\n"
-        gch "$2" && g pull
-    fi
+  if [ "$1" != "$2" ]; then
+    printf "\nPulling dev branch $2...\n"
+    gch "$2" && g pull
+  fi
 
-    if [ $stash_result -eq 1 ]; then
+  if [ $stash_result -eq 1 ]; then
       g stash apply
-    fi
+  fi
 }
 
 loadenv () {
