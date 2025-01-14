@@ -32,3 +32,5 @@
         default = simple
 [pull]
 	    rebase = false
+[credential]
+	    helper = store
