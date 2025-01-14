@@ -20,6 +20,7 @@ install_extensions () {
         info "Installing VSCode extensions..."
 
         code --install-extension eamodio.gitlens --force
+        code --install-extension mhutchie.git-graph --force
         code --install-extension mohsen1.prettify-json --force
         code --install-extension humao.rest-client --force
         code --install-extension golang.go --force
