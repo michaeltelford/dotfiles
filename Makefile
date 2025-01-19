@@ -28,7 +28,7 @@ help:
 	@echo "brew        - Installs homebrew packages."
 	@echo "topics      - Runs all topic installers."
 	@echo "run         - Runs the given topic installer."
-	@echo "              Use 'make run TOPIC=ruby' etc."
+	@echo "              Use 'make run topic=ruby' etc."
 	@echo "              Note: some installers require certain brew packages."
 	@echo ""
 
@@ -59,4 +59,4 @@ topics:
 
 run:
 	@source "$(DOTFILES_ROOT)/install_helpers.sh" && \
-	source "$(DOTFILES_ROOT)/$(TOPIC)/install.sh"
+	source "$(DOTFILES_ROOT)/$(topic)/install.sh"
