@@ -19,8 +19,13 @@ bashfuncs () {
   echo 'findall  - Find all matching files on file system e.g.'
   echo '           findall "docker"'
   echo 'finddot  - Find all dotfile symlinks in the home folder'
-  echo 'search   - Grep recursively for pattern in local dir e.g.'
-  echo '           search "My Project"'
+  echo 'findgrep - Recursively finds files and greps them e.g.'
+  echo '           findgrep grep_pattern file_pattern directory_depth'
+  echo '           findgrep "blah"'
+  echo '           findgrep "blah" "*" 3'
+  echo '           findgrep "mypkg" "go.mod" 2'
+  echo 'grepr    - Grep recursively for pattern in local dir e.g.'
+  echo '           grepr "My Project"'
   echo 'rmds     - Recursively remove all .DS_Store files from local dir'
   echo 'dir      - Create a dir in the local dir and cd into it e.g.'
   echo '           dir newproject'
@@ -81,7 +86,15 @@ finddot () {
 }
 alias finddots=finddot
 
-search () {
+findgrep () {
+  local pattern=$1
+  local filename=${2:-"*"}
+  local depth=${3:-1}
+
+  find . -name $filename -maxdepth $depth -type f -exec echo {} \; -exec grep -ni "$pattern" {} \;
+}
+
+grepr () {
   grep -rni "$1" .
 }
 
