@@ -25,6 +25,7 @@ install_extensions () {
         code --install-extension humao.rest-client --force
         code --install-extension golang.go --force
         code --install-extension shopify.ruby-lsp --force
+        code --install-extension github.copilot --force
     fi
 }
 
