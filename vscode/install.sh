@@ -10,8 +10,14 @@
 install_settings () {
     info "Installing your preferred VSCode settings..."
 
+    if test "$(uname)" = "Darwin"; then
+        local path="$HOME/Library/Application Support/Code/User/settings.json"
+    else
+        local path="$HOME/.config/Code/User"
+    fi
+
     local overwrite_all=false backup_all=true skip_all=false
-    link_file "$DOTFILES_ROOT/vscode/settings.json" "/Users/michaeltelford/Library/Application Support/Code/User/settings.json"
+    link_file "$DOTFILES_ROOT/vscode/settings.json" $path
 }
 
 # Install your preferred VSCode extensions.
