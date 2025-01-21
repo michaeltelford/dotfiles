@@ -13,7 +13,7 @@ install_settings () {
     if test "$(uname)" = "Darwin"; then
         local path="$HOME/Library/Application Support/Code/User/settings.json"
     else
-        local path="$HOME/.config/Code/User"
+        local path="$HOME/.config/Code/User/settings.json"
     fi
 
     local overwrite_all=false backup_all=true skip_all=false
