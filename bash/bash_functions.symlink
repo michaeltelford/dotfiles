@@ -91,7 +91,7 @@ findgrep () {
   local filename=${2:-"*"}
   local depth=${3:-1}
 
-  find . -name $filename -maxdepth $depth -type f -exec echo {} \; -exec grep -ni "$pattern" {} \;
+  find . -name "$filename" -maxdepth $depth -type f -exec echo '{}' \; -exec grep -ni "$pattern" '{}' \;
 }
 
 grepr () {
