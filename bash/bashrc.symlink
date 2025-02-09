@@ -37,7 +37,7 @@ test -d ~/Development/Go && export GOPATH=~/Development/Go && export PATH=$GOPAT
 test -d /usr/local/go && export GOROOT=/usr/local/go && export PATH=$GOROOT/bin:$PATH
 test -d /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
 test -d ~/.crenv/bin && export PATH=~/.crenv/bin:$PATH && eval $(crenv init -)
-test -d ~/.rbenv/bin && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)"
+test -d ~/.rbenv && export PATH="$HOME/.rbenv/bin:$PATH" && eval "$(rbenv init -)"
 test -d ~/.goenv/bin && export GOENV_ROOT="$HOME/.goenv" && export PATH="$GOENV_ROOT/bin:$PATH" && eval "$(goenv init -)"
 
 # Load ps1 behaviour e.g. prompt, colouring etc.

@@ -5,7 +5,7 @@
 
 # Standard exports.
 export DOTFILES_ROOT=~/.dotfiles
-export BROWSER='chrome'
+export BROWSER='firefox'
 export EDITOR="code"
 export KUBE_EDITOR="code -w"
 export VISUAL='nano'
