@@ -5,6 +5,7 @@
     "files.trimFinalNewlines": true,
     "editor.fontSize": 18,
     "go.testOnSave": true,
+    "go.testFlags": ["-count=1"],
     "workbench.startupEditor": "none",
     "editor.inlineSuggest.enabled": true,
     "terminal.explorerKind": "external",
