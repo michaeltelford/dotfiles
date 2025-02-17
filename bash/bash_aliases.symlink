@@ -42,7 +42,7 @@ alias gac='git add -A && git commit -m'
 # Basic Docker (and Docker Compose) commands.
 # See docker_functions.symlink for more advanced functionality.
 alias d='docker'
-alias dc='docker-compose'
+alias dc='docker compose'
 
 # Kubernetes commands.
 alias mk='minikube'
