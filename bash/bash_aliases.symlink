@@ -36,7 +36,7 @@ alias gb='git branch -av' # shows all branches including remote one's
 alias glb='git branch' # shows all local branches
 alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
-alias gfap='git fetch --all --prune' # Updates from the remotes branches
+alias gfap='git fetch --all --prune --tags' # Updates from the remotes branches
 alias gac='git add -A && git commit -m'
 
 # Basic Docker (and Docker Compose) commands.

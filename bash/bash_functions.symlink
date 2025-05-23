@@ -202,7 +202,9 @@ _pull_repo() {
 
 loadenv () {
   local env_file=${1:-".env"}
-  while read env_var; do
+  while read -r env_var; do
+    # Skip empty lines and comments
+    [[ -z "$env_var" || "$env_var" =~ ^# ]] && continue
     export "$env_var"
   done < "$env_file"
 }
