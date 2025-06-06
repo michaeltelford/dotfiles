@@ -68,6 +68,10 @@ dr () {
   docker run --rm --name "${1}" "${1}"
 }
 
+dii () {
+  docker image inspect "${1}"
+}
+
 dei () {
   local cmd=${2:-"bash"}
   docker exec -it ${1} $cmd
