@@ -38,6 +38,7 @@ alias gch='git checkout'
 alias gcb='git checkout -b' # creates and check's out the new given branch name
 alias gfap='git fetch --all --prune --tags' # Updates from the remotes branches
 alias gac='git add -A && git commit -m'
+alias gpush='git push -u origin head'
 
 # Basic Docker (and Docker Compose) commands.
 # See docker_functions.symlink for more advanced functionality.
