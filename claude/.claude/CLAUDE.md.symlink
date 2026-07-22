@@ -1,0 +1,9 @@
+# Skills
+
+When asked to create a new Claude Code skill, do not write it directly to `~/.claude/skills/`. Instead:
+
+1. Create the skill in the dotfiles repo: `~/.dotfiles/claude/.claude/skills/<skill-name>/SKILL.md.symlink`
+2. Symlink it into place: `mkdir -p ~/.claude/skills/<skill-name>` then `ln -s ~/.dotfiles/claude/.claude/skills/<skill-name>/SKILL.md.symlink ~/.claude/skills/<skill-name>/SKILL.md` (this is what `make dotfiles` in the repo does)
+3. Remind me to commit the new file in `~/.dotfiles`
+
+This is because my Claude config is version-controlled in `~/.dotfiles` (the `claude/` topic directory) — files written straight to `~/.claude/` are untracked by git. Follow the existing skills (e.g. `skill-repo-audit`) for naming and structure. Edits to existing skills go through the symlink automatically, but the real file lives in the dotfiles repo.

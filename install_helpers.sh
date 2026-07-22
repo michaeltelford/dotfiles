@@ -136,9 +136,22 @@ symlink_dotfiles () {
 
   local overwrite_all=false backup_all=true skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+  for src in $(find -H "$DOTFILES_ROOT" -name '*.symlink' -not -path '*.git*')
   do
-    dst="$HOME/.$(basename "${src%.*}")"
+    local relative="${src#$DOTFILES_ROOT/}"
+    relative="${relative#*/}"  # Strip the topic directory e.g. bash/, claude/ etc.
+
+    if [ "$relative" == "$(basename "$src")" ]
+    then
+      # Top level file e.g. bash/bashrc.symlink -> ~/.bashrc
+      dst="$HOME/.$(basename "${src%.*}")"
+    else
+      # Nested file, mirror its sub directory path in $HOME e.g.
+      # claude/.claude/skills/skill-repo-audit/SKILL.md.symlink -> ~/.claude/skills/skill-repo-audit/SKILL.md
+      dst="$HOME/${relative%.symlink}"
+      create_dir "$(dirname "$dst")"
+    fi
+
     link_file "$src" "$dst"
   done
 

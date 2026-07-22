@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(rm -fr:*)",
+      "Bash(find * -delete)",
+      "Bash(sudo:*)",
+      "Bash(curl:*|sh:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git rebase:*)",
+      "Bash(git merge:*)",
+      "Bash(psql:*)",
+      "Bash(ssh:*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Bash(brew:*)",
+      "Bash(apt:*)"
+    ]
+  },
+  "model": "claude-fable-5[1m]",
+  "theme": "dark"
+}

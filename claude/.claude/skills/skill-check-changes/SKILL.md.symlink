@@ -1,0 +1,46 @@
+---
+name: skill-check-changes
+description: Check the unstaged changes (git diff) in a repo, determine whether they are functional (behavior-changing) or non-functional, summarize the changeset, and end with a PASS/FAIL verdict (FAIL if the code won't compile or the changes look unlikely to achieve their intent). Takes one argument - the repo (path or name).
+argument-hint: <repo-path-or-name>
+---
+
+# Check Changes
+
+Inspect the **unstaged** changes in a repository, classify them as functional or non-functional, and summarize the changeset. This skill is strictly READ-ONLY: never stage, commit, stash, restore, or modify anything.
+
+## Argument
+
+- `$1` — the repository to check. If it's an absolute path, use it directly. If it's a bare name (e.g. `job-manager`), resolve it: check the current working directory first, then sibling directories of the CWD (e.g. `../$1`), then common dev roots (e.g. `~/Development/**/$1`). If it can't be found or isn't a git repo, ask the user for the path. If `$1` is omitted, use the current working directory.
+
+## Workflow
+
+1. **Gather the diff** (unstaged only — do NOT include `--staged`/`--cached`):
+   - `git -C <repo> status --short` — overall state, including untracked files.
+   - `git -C <repo> diff --stat` — shape of the changeset.
+   - `git -C <repo> diff` — the full unstaged diff to analyze.
+
+   If there are no unstaged changes, report that (mentioning any staged/untracked files that do exist) and stop.
+
+2. **Classify each changed file** from its actual hunks — not from the filename alone:
+   - **Non-functional**: comment/docstring changes, whitespace and formatting, log/error message wording, docs (README, CHANGELOG, etc.), pure renames with no logic change, sample configs not read at runtime, generated files and lock files (when they only reflect other changes).
+   - **Test-only**: changes confined to test files/fixtures. Flag these separately — they change test behavior but not production behavior.
+   - **Functional**: anything that can alter runtime behavior — logic, conditionals, values/constants, function signatures, dependency versions, SQL/migrations, runtime-read config, CI/build steps that affect the produced artifact.
+
+   When a hunk is ambiguous (e.g. a moved block that might have been edited, or a value whose runtime use is unclear), Read the surrounding code in the file to decide rather than guessing.
+
+3. **Sanity-check the changes**:
+   - **Compilation**: if the project has a cheap, side-effect-free check command (e.g. `go build ./...` / `go vet ./...`, `tsc --noEmit`, `cargo check`, `python -m py_compile <files>`), run it to confirm the code still compiles/parses. These commands don't modify the working tree, so they remain within the read-only rule. If no such check is available, assess compilability by reading the diff and surrounding code (undefined symbols, type mismatches, syntax errors).
+   - **Intent**: infer the apparent purpose of the changeset from the diff and judge whether the changes plausibly achieve it. Look for red flags: obvious typos, half-finished edits, logic that contradicts the apparent goal, debug leftovers (`console.log`, `TODO`, commented-out code), or inconsistencies between related hunks.
+
+4. **Report** in this order, keeping it brief:
+   - **Verdict first**: one line — `Functional`, `Non-functional`, or `Mixed` (with the split, e.g. "Mixed — 3 files functional, 2 non-functional, 1 test-only").
+   - **Changeset summary**: 2–5 sentences describing what the changes collectively do, written for someone who hasn't seen the diff.
+   - **Per-file breakdown**: a table of file, classification (functional / non-functional / test-only), and a one-line description of the change.
+   - If untracked files exist, mention them at the end as context, noting they are untracked and not part of the diff.
+   - **Final result**: end the report with a single line containing exactly `PASS` or `FAIL` (nothing else on the line). Emit `PASS` only when the code still compiles AND the changes look likely to deliver their apparent intended outcome. Emit `FAIL` when compilation is broken, when a change clearly can't achieve its apparent intent, or when a serious red flag from step 3 makes the changeset suspect — the FAIL is an alert that something may not be right. State the reason for a FAIL on the line above the verdict.
+
+## Rules
+
+- Read-only throughout — inspection commands only.
+- Base every classification on the diff content (and file context where needed), never on the file name or path alone.
+- Keep the output concise; the verdict and summary are the deliverable, the table is supporting detail.
