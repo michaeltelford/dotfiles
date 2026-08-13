@@ -1,0 +1,55 @@
+---
+name: skill-dev-tests
+description: Review the commits on the current branch (only), identify the logic changes, and propose (via plan mode) what tests need written or updated to cover them. Writes nothing until the plan is approved; test changes then follow the existing test patterns. Never stages or commits. Takes one optional argument - the repo (path or name).
+argument-hint: [repo-path-or-name]
+---
+
+# Dev Tests
+
+Analyze the commits unique to the current branch, work out which logic changed, and propose the tests that need written or updated to cover those changes. This runs in **plan mode**: nothing is written until the user approves the plan.
+
+## Argument
+
+- `$1` — the repository to analyze. If it's an absolute path, use it directly. If it's a bare name (e.g. `job-manager`), resolve it: check the current working directory first, then sibling directories of the CWD (e.g. `../$1`), then common dev roots (e.g. `~/Development/**/$1`). If it can't be found or isn't a git repo, ask the user for the path. If `$1` is omitted, use the current working directory.
+
+## Workflow
+
+### Phase 1 — Plan (read-only, in plan mode)
+
+1. **Enter plan mode** if not already in it (via EnterPlanMode). All of Phase 1 is read-only.
+
+2. **Scope the branch commits (only)**:
+   - `git -C <repo> branch --show-current` — the current branch.
+   - Determine the base branch (`main`, `master`, or the repo's default — check `git symbolic-ref refs/remotes/origin/HEAD` if unsure).
+   - `git -C <repo> log --oneline <base>..HEAD` — the commits unique to this branch. If there are none, report that and stop.
+   - `git -C <repo> diff <base>...HEAD --stat` then `git -C <repo> diff <base>...HEAD` — the cumulative changes those commits introduce. Use the three-dot form so only this branch's changes are included, not drift on the base branch. Do **not** include uncommitted working-tree changes in the analysis.
+
+3. **Identify the logic changes**: from the diff, separate behavior-changing hunks (logic, conditionals, new functions/methods, changed signatures, error handling, config read at runtime) from non-functional ones (comments, formatting, docs, renames). Only the behavior-changing ones need test coverage. Read surrounding code where a hunk is ambiguous.
+
+4. **Survey the existing tests**: locate the test files relevant to the changed code (same package/module conventions — `*_test.go`, `*.spec.ts`, `test_*.py`, etc.). Note the established patterns: test framework, naming, table-driven vs individual cases, mocking/fixture approach, assertion style, file placement. These patterns are the template for any proposed tests.
+
+5. **Propose the test plan** (via ExitPlanMode): for each logic change, state:
+   - What changed (with `file:line` references).
+   - Whether an existing test covers it, needs **updating**, or a **new** test is needed (and in which file).
+   - The specific cases to cover: happy path, error paths, edge cases introduced by the change.
+   - Which existing test each addition will be modeled on, so the suite stays consistent.
+
+   Do not change anything at this stage — the plan is the deliverable. Stop here until the user approves.
+
+### Phase 2 — Implement (only after explicit go-ahead)
+
+6. **Write/update the tests** exactly as planned:
+   - Match the pattern of the existing tests precisely — same structure, naming, assertion style, mocking approach. New tests should be indistinguishable in style from the ones already there.
+   - Touch test files only, unless the plan explicitly flagged a needed test helper/fixture.
+
+7. **Run the affected tests** to confirm they pass (and that new tests actually exercise the changed logic — a test that passes against the old behavior too is worth flagging).
+
+8. **Report**: which files were added/updated, the test results, and anything from the plan that was skipped or adjusted (with the reason).
+
+## Rules
+
+- Analyze branch commits only (`<base>...HEAD`) — never the working tree diff or base-branch changes.
+- Phase 1 is strictly read-only; no edits of any kind before the plan is approved.
+- **Never run `git add`, `git commit`, `git stash`, or anything that stages or mutates git state** — the user needs to run `git diff` over the finished work themselves. Leave all changes unstaged.
+- Test changes must be consistent with the existing suite; do not introduce a new framework, style, or directory layout.
+- Do not modify production code. If a change looks untestable without refactoring, say so in the plan instead of refactoring.
