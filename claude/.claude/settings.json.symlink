@@ -1,6 +1,15 @@
 {
   "permissions": {
     "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)",
+
+      "Bash(cat **/.env*)",
+      "Bash(cat ~/.ssh/**)",
       "Bash(rm -rf:*)",
       "Bash(rm -fr:*)",
       "Bash(find * -delete)",
@@ -19,6 +28,6 @@
       "Bash(apt:*)"
     ]
   },
-  "model": "claude-fable-5[1m]",
+  "model": "fable[1m]",
   "theme": "dark"
 }
