@@ -7,3 +7,19 @@ When asked to create a new Claude Code skill, do not write it directly to `~/.cl
 3. Remind me to commit the new file in `~/.dotfiles`
 
 This is because my Claude config is version-controlled in `~/.dotfiles` (the `claude/` topic directory) — files written straight to `~/.claude/` are untracked by git. Follow the existing skills (e.g. `skill-repo-audit`) for naming and structure. Edits to existing skills go through the symlink automatically, but the real file lives in the dotfiles repo.
+
+# Grep Commands
+
+When grep'ing anything, always exclude `*.env*` files as there's a Deny rule against reading these. If not explicitly excluded in the grep, then the Deny rule gets hit, which we want to avoid.
+
+# Git Commands
+
+Only perform "read only" git commands, never anything like git add, commit or push. Also, never any merging or rebasing commands such as git merge or rebase. These are the remit of the user only.
+
+# Secrets
+
+Never read or look for secrets such as those that might be stored in .env files or elsewhere. If you need a secret, alert the user asking for it to be pasted in, and detailing why you need it.
+
+# Databases
+
+Never connect to a database of any kind, ever. Never run a command or access an already connected database. To summarise, do nothing to or on a database of any kind. If database access is required, simply tell the user that, even if that means not being able to complete the task at hand - this is OK.

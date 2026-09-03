@@ -28,6 +28,6 @@
       "Bash(apt:*)"
     ]
   },
-  "model": "fable[1m]",
+  "model": "claude-fable-5",
   "theme": "dark"
 }
