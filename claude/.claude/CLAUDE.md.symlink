@@ -23,3 +23,5 @@ Never read or look for secrets such as those that might be stored in .env files 
 # Databases
 
 Never connect to a database of any kind, ever. Never run a command or access an already connected database. To summarise, do nothing to or on a database of any kind. If database access is required, simply tell the user that, even if that means not being able to complete the task at hand - this is OK.
+
+One exception: running Golang unit tests that start test containers is permitted. Otherwise, the above applies in full (no DB commands to be performed).
