@@ -1,6 +1,6 @@
 ---
 name: skill-dev-tests
-description: Review the commits on the current branch (only), identify the logic changes, and propose (via plan mode) what tests need written or updated to cover them. Writes nothing until the plan is approved; test changes then follow the existing test patterns. Never stages or commits. Takes one optional argument - the repo (path or name).
+description: Review the commits on the current branch (only), identify the logic changes, and propose (via plan mode) what tests need written or updated to cover them. Errors out immediately if the working tree isn't clean. Writes nothing until the plan is approved; test changes then follow the existing test patterns. Never stages or commits. Takes one optional argument - the repo (path or name).
 argument-hint: [repo-path-or-name]
 ---
 
@@ -13,6 +13,10 @@ Analyze the commits unique to the current branch, work out which logic changed, 
 - `$1` — the repository to analyze. If it's an absolute path, use it directly. If it's a bare name (e.g. `job-manager`), resolve it: check the current working directory first, then sibling directories of the CWD (e.g. `../$1`), then common dev roots (e.g. `~/Development/**/$1`). If it can't be found or isn't a git repo, ask the user for the path. If `$1` is omitted, use the current working directory.
 
 ## Workflow
+
+### Phase 0 — Preliminary check (abort if dirty)
+
+Before anything else, verify the working tree is clean: `git -C <repo> status --porcelain`. If there is **any** output (staged, unstaged, or untracked changes), stop immediately and do nothing further — do not enter plan mode, do not analyze anything. Report to the user that the branch isn't clean and that they need to commit or stash their changes before re-running the skill. (Do not stash on their behalf — see Rules.)
 
 ### Phase 1 — Plan (read-only, in plan mode)
 
@@ -48,6 +52,7 @@ Analyze the commits unique to the current branch, work out which logic changed, 
 
 ## Rules
 
+- Require a clean working tree before doing anything; if it's dirty, abort with an error and do nothing.
 - Analyze branch commits only (`<base>...HEAD`) — never the working tree diff or base-branch changes.
 - Phase 1 is strictly read-only; no edits of any kind before the plan is approved.
 - **Never run `git add`, `git commit`, `git stash`, or anything that stages or mutates git state** — the user needs to run `git diff` over the finished work themselves. Leave all changes unstaged.
